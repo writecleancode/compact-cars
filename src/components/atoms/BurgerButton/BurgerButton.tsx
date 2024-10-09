@@ -1,11 +1,6 @@
-import { useState } from 'react';
 import { Wrapper } from './BurgerButton.styles';
 
-export const BurgerButton = () => {
-	const [isNavActive, setNavState] = useState(false);
-
-	const handleMobileNav = () => setNavState(prevState => !prevState);
-
+export const BurgerButton = ({ isNavActive, handleMobileNav }) => {
 	return (
 		<Wrapper $isActive={isNavActive} onClick={handleMobileNav}>
 			<span className='burger-line burger-line--top'></span>

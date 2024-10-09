@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import { GlobalStyle } from 'src/assets/styles/GlobalStyle';
 import { MainTemplate } from 'src/components/templates/MainTemplate/MainTemplate';
 import { Header } from 'src/components/atoms/Header/Header';
@@ -9,13 +10,16 @@ export const Root = () => {
 
 	const handleMobileNav = () => setNavState(prevState => !prevState);
 
+	const closeMobileNav = () => setNavState(false);
+
 	return (
 		<div>
 			<GlobalStyle />
 			<MainTemplate>
 				<Header isNavActive={isNavActive} handleMobileNav={handleMobileNav} />
-				<NavBar isNavActive={isNavActive} />
+				<NavBar isNavActive={isNavActive} closeMobileNav={closeMobileNav} />
 			</MainTemplate>
+			<Outlet />
 		</div>
 	);
 };

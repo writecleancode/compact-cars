@@ -11,15 +11,20 @@ export const Wrapper = styled.div`
 
 export const SearchWrapper = styled.div`
 	display: flex;
-    gap: 1.6rem;
-    padding: 0.8rem;
-    background-color: #d9d9d9;
+	gap: 1.6rem;
+	padding: 0.8rem;
+	background-color: #d9d9d9;
 	/* position: relative; */
 	/* margin-bottom: 4rem; */
 	/* height: 31px; */
 `;
 
-export const CarCardsWrapper = styled.div``;
+export const CarCardsWrapper = styled.div`
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1rem;
+    padding: 1.2rem;
+`;
 
 // export const CarsWrapper = styled.div`
 /* display: grid; */

@@ -9,6 +9,17 @@ export const Wrapper = styled.div`
 	/* overflow-y: scroll; */
 `;
 
+export const FiltersWrapper = styled.div`
+	padding: 0.8rem 0.8rem 0.4rem;
+	/* background-color: #d9d9d9; */
+`;
+
+export const ManageFiltersButton = styled.button`
+	display: block;
+	padding: 0.3rem;
+	width: 100%;
+`;
+
 export const SearchWrapper = styled.div`
 	display: flex;
 	gap: 1.6rem;
@@ -23,7 +34,7 @@ export const CarCardsWrapper = styled.div`
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 1rem;
-    padding: 1.2rem;
+	padding: 1.2rem;
 `;
 
 // export const CarsWrapper = styled.div`

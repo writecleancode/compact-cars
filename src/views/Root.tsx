@@ -18,7 +18,7 @@ export const Root = () => {
 	}, [currentRoute]);
 
 	useEffect(() => {
-		isNavActive ? document.body.classList.add('navOpened') : document.body.classList.remove('navOpened');
+		isNavActive ? document.body.classList.add('preventScroll') : document.body.classList.remove('preventScroll');
 	}, [isNavActive]);
 
 	return (

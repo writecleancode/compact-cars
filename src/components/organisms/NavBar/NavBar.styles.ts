@@ -8,6 +8,8 @@ export const Wrapper = styled.div<{ $isNavActive: boolean }>`
 	padding: 2.4rem;
 	border-right: 1px solid #d8d8d8;
 	height: 100%;
+	min-height: 100vh;
+	min-height: 100svh;
 	background-color: #fff;
 	transition: translate 0.2s;
 `;
@@ -55,6 +57,8 @@ export const BackgroundTint = styled.div<{ $isNavActive: boolean }>`
 	left: 0;
 	right: 0;
 	height: 100%;
+	min-height: 100vh;
+	min-height: 100svh;
 	background-color: rgba(0, 0, 0, 0.3);
 	z-index: 0;
 	opacity: ${({ $isNavActive }) => ($isNavActive ? '1' : '0')};

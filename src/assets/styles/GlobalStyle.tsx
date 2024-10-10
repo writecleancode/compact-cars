@@ -17,6 +17,11 @@ export const GlobalStyle = createGlobalStyle`
         color: #3e3e3e;
         font-size: 1.6rem;
         font-family: 'Montserrat', sans-serif;
+        position: relative;
+
+        &.navOpened {
+            overflow-y: hidden;
+        }
     }
 
     img {

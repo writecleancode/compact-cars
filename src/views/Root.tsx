@@ -17,6 +17,10 @@ export const Root = () => {
 		closeMobileNav();
 	}, [currentRoute]);
 
+	useEffect(() => {
+		isNavActive ? document.body.classList.add('navOpened') : document.body.classList.remove('navOpened');
+	}, [isNavActive]);
+
 	return (
 		<div>
 			<GlobalStyle />

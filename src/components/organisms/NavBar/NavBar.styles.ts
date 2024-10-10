@@ -7,7 +7,7 @@ export const Wrapper = styled.div<{ $isNavActive: boolean }>`
 	translate: ${({ $isNavActive }) => ($isNavActive ? '0' : '-100%')};
 	padding: 2.4rem;
 	border-right: 1px solid #d8d8d8;
-	height: 100vh;
+	height: 100%;
 	background-color: #fff;
 	transition: translate 0.2s;
 `;

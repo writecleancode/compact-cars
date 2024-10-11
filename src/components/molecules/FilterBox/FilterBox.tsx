@@ -19,7 +19,7 @@ export const FilterBox = ({ title, options, $isYears, handleFilter }: FilterBoxP
 						$isActive={option.isActive}
 						// data-content={option.value}
 						// data-testid={option.value}
-						onClick={() => handleFilter(option)}>
+						onClick={() => handleFilter(option.value)}>
 						{option.value}
 					</FilterItem>
 				))}

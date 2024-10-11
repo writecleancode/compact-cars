@@ -15,7 +15,7 @@ const filterYearsData = filterYears.map(option => ({ value: option, isActive: fa
 
 export const Dashboard = () => {
 	const [carsToDisplay, setCarsToDisplay] = useState(cars);
-	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: [], years: [] });
+	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
 	const [searchPhrase, setSearchPhrase] = useState('');
 	const [isModalOpen, setModalState] = useState(false);
 
@@ -27,9 +27,21 @@ export const Dashboard = () => {
 
 	const closeModal = () => setModalState(false);
 
-	// const handleFilterOptionActiveStatus = (option, optionType) => {
-	// 	setUsersFilterPreferences(prevState => ({ ...prevState }));
-	// };
+	const handleFilterOptionActiveStatus = (clickedOption, optionType) => {
+		const clickedOptionIndex = usersFilterPreferences[optionType].map(option => option.value).indexOf(clickedOption);
+
+		setUsersFilterPreferences(prevState => ({
+			...prevState,
+			[optionType]: [
+				...prevState[optionType].slice(0, clickedOptionIndex),
+				{
+					...prevState[optionType][clickedOptionIndex],
+					isActive: !prevState[optionType][clickedOptionIndex].isActive,
+				},
+				...prevState[optionType].slice(clickedOptionIndex + 1),
+			],
+		}));
+	};
 
 	const handleFilterPreferences = (clickedOption, optionType) => {
 		if (usersFilterPreferences[optionType].includes(clickedOption)) {
@@ -49,20 +61,21 @@ export const Dashboard = () => {
 	const handleFilterOptionClick = option => {
 		const optionType = typeof option.value === 'number' ? 'years' : 'brands';
 
-		handleFilterPreferences(option.value, optionType);
+		// handleFilterPreferences(option.value, optionType);
+		handleFilterOptionActiveStatus(option.value, optionType);
 	};
 
-	const filterCars = carsToFilter => {
-		// setCarsToDisplay(filteredCars)
-	};
+	// const filterCars = carsToFilter => {
+	// 	// setCarsToDisplay(filteredCars)
+	// };
 
 	useEffect(() => {
 		isModalOpen ? document.body.classList.add('preventScroll') : document.body.classList.remove('preventScroll');
 	}, [isModalOpen]);
 
-	useEffect(() => {
-		filterCars(cars);
-	}, [usersFilterPreferences]);
+	// useEffect(() => {
+	// 	filterCars(cars);
+	// }, [usersFilterPreferences]);
 
 	return (
 		<Wrapper>
@@ -73,8 +86,13 @@ export const Dashboard = () => {
 			<FiltersWrapper>
 				<ManageFiltersButton onClick={openModal}>manage filters</ManageFiltersButton>
 				<Modal isOpen={isModalOpen} closeModal={closeModal}>
-					<FilterBox title='Choose production year(s):' options={filterYearsData} $isYears handleFilter={handleFilterOptionClick} />
-					<FilterBox title='Choose brand(s):' options={filterBrandsData} handleFilter={handleFilterOptionClick} />
+					<FilterBox
+						title='Choose production year(s):'
+						options={usersFilterPreferences.years}
+						$isYears
+						handleFilter={handleFilterOptionClick}
+					/>
+					<FilterBox title='Choose brand(s):' options={usersFilterPreferences.brands} handleFilter={handleFilterOptionClick} />
 				</Modal>
 			</FiltersWrapper>
 			<CarCardsWrapper>

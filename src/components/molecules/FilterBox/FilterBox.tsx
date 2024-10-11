@@ -7,13 +7,13 @@ type FilterBoxProps = {
 	$isYears?: boolean;
 };
 
-export const FilterBox = ({ title, options, $isYears }: FilterBoxProps) => {
+export const FilterBox = ({ title, options, $isYears, handleFilter }: FilterBoxProps) => {
 	return (
 		<Wrapper>
 			<StyledTitle $isFilterTitle>{title}</StyledTitle>
 			<FilterItems>
 				{options.map(option => (
-					<FilterItem key={option} $isYears={$isYears} data-content={option} data-testid={option}>
+					<FilterItem key={option} $isYears={$isYears} data-content={option} data-testid={option} onClick={(e) => handleFilter(e, option)}>
 						{option}
 					</FilterItem>
 				))}

@@ -9,7 +9,7 @@ type ModalProps = {
 
 export const Modal = ({ isOpen, closeModal, children }: ModalProps) => {
 	return (
-		<Wrapper isOpen={isOpen} onRequestClose={closeModal}>
+		<Wrapper isOpen={isOpen} onRequestClose={closeModal} appElement={document.body}>
 			{children}
 			<ModalButton onClick={closeModal}>Close</ModalButton>
 		</Wrapper>

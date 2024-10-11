@@ -6,7 +6,7 @@ export const Wrapper = styled(ReactModal)`
 	background-color: #fff;
     box-shadow: 0 0 16px rgba(0, 0, 0, .5);
     max-height: 100vh;
-    overflow: scroll;
+    overflow-y: scroll;
 `;
 
 export const ModalButton = styled.button`

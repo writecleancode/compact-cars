@@ -10,6 +10,8 @@ import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, SearchWrapper, Wr
 import { Modal } from 'src/components/organisms/Modal/Modal';
 
 const cars = carsData;
+const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
+const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
 
 export const Dashboard = () => {
 	const [carsToDisplay, setCarsToDisplay] = useState(cars);
@@ -25,27 +27,29 @@ export const Dashboard = () => {
 
 	const closeModal = () => setModalState(false);
 
-	const handleActiveClass = e => {
-		e.target.classList.toggle('active');
-	};
+	// const handleFilterOptionActiveStatus = (option, optionType) => {
+	// 	setUsersFilterPreferences(prevState => ({ ...prevState }));
+	// };
 
-	const handleFilterPreferences = option => {
-		// console.log(option);
-		// console.log(usersFilterPreferences.brands.indexOf(option));
-
-		if (usersFilterPreferences.brands.includes(option)) {
-			const filteredOptions = usersFilterPreferences.brands.filter(brand => brand !== option);
-			usersFilterPreferences.brands = filteredOptions;
+	const handleFilterPreferences = (clickedOption, optionType) => {
+		if (usersFilterPreferences[optionType].includes(clickedOption)) {
+			const clickedOptionIndex = usersFilterPreferences[optionType].indexOf(clickedOption);
+			setUsersFilterPreferences(prevState => ({
+				...prevState,
+				[optionType]: [...prevState[optionType].slice(0, clickedOptionIndex), ...prevState[optionType].slice(clickedOptionIndex + 1)],
+			}));
 		} else {
-			usersFilterPreferences.brands = [...usersFilterPreferences.brands, option];
+			setUsersFilterPreferences(prevState => ({
+				...prevState,
+				[optionType]: [...prevState[optionType], clickedOption],
+			}));
 		}
-
-		console.log(usersFilterPreferences.brands);
 	};
 
-	const handleFilterOptionClick = (e, option) => {
-		handleActiveClass(e);
-		handleFilterPreferences(option);
+	const handleFilterOptionClick = option => {
+		const optionType = typeof option.value === 'number' ? 'years' : 'brands';
+
+		handleFilterPreferences(option.value, optionType);
 	};
 
 	const filterCars = carsToFilter => {
@@ -69,8 +73,8 @@ export const Dashboard = () => {
 			<FiltersWrapper>
 				<ManageFiltersButton onClick={openModal}>manage filters</ManageFiltersButton>
 				<Modal isOpen={isModalOpen} closeModal={closeModal}>
-					<FilterBox title='Choose production year(s):' options={filterYears} $isYears handleFilter={handleFilterOptionClick} />
-					<FilterBox title='Choose brand(s):' options={filterBrands} handleFilter={handleFilterOptionClick} />
+					<FilterBox title='Choose production year(s):' options={filterYearsData} $isYears handleFilter={handleFilterOptionClick} />
+					<FilterBox title='Choose brand(s):' options={filterBrandsData} handleFilter={handleFilterOptionClick} />
 				</Modal>
 			</FiltersWrapper>
 			<CarCardsWrapper>

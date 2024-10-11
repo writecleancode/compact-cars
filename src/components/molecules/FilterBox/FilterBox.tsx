@@ -3,7 +3,7 @@ import { FilterItem, FilterItems, Wrapper } from './FilterBox.styles';
 
 type FilterBoxProps = {
 	title: string;
-	options: (string | number)[];
+	options: { value: string | number; isActive: boolean }[];
 	$isYears?: boolean;
 };
 
@@ -13,8 +13,14 @@ export const FilterBox = ({ title, options, $isYears, handleFilter }: FilterBoxP
 			<StyledTitle $isFilterTitle>{title}</StyledTitle>
 			<FilterItems>
 				{options.map(option => (
-					<FilterItem key={option} $isYears={$isYears} data-content={option} data-testid={option} onClick={(e) => handleFilter(e, option)}>
-						{option}
+					<FilterItem
+						key={option.value}
+						$isYears={$isYears}
+						$isActive={option.isActive}
+						// data-content={option.value}
+						// data-testid={option.value}
+						onClick={() => handleFilter(option)}>
+						{option.value}
 					</FilterItem>
 				))}
 			</FilterItems>

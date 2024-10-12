@@ -46,17 +46,37 @@ export const Dashboard = () => {
 	// const handleFilterPreferences = clickedOption => {};   // - alternative name for funcion above
 
 	const filterCars = () => {
-		const filteredCars = (() => {
+		let filteredCars = (() => {
 			if (usersFilterPreferences.brands.some(option => option.isActive)) {
-				const filteredCars = [];
+				const filteredByBrand = [];
 				usersFilterPreferences.brands.forEach(option => {
 					if (option.isActive) {
-						cars.forEach(car => car.brand === option.value && filteredCars.push(car));
+						cars.forEach(car => car.brand === option.value && filteredByBrand.push(car));
 					}
 				});
-				return filteredCars;
+				return filteredByBrand;
 			} else {
 				return cars;
+			}
+		})();
+
+		filteredCars = (() => {
+			if (usersFilterPreferences.years.some(option => option.isActive)) {
+				usersFilterPreferences.years.forEach(option => {
+					if (option.isActive) {
+						filteredCars = filteredCars.filter(car => {
+							if (option.value >= car.productionStartYear && option.value <= car.productionEndYear) {
+								return car;
+							}
+						});
+					} else {
+						return;
+					}
+				});
+
+				return filteredCars;
+			} else {
+				return filteredCars;
 			}
 		})();
 

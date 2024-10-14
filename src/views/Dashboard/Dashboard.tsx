@@ -80,33 +80,26 @@ export const Dashboard = () => {
 		setCars(sortedCars);
 	};
 
-	useEffect(() => {
-		handleFilterCars();
-	}, [cars]);
-
 	const handleFilterCars = () => {
 		let filteredCars = cars;
 
 		if (usersFilterPreferences.brands.some(option => option.isActive)) {
 			const filteredByBrand = [];
-			usersFilterPreferences.brands.forEach(option => {
-				if (option.isActive) {
-					cars.forEach(car => car.brand === option.value && filteredByBrand.push(car));
-				}
+			const activeFilterClasses = usersFilterPreferences.brands.filter(option => option.isActive);
+
+			cars.forEach(car => {
+				activeFilterClasses.forEach(option => option.value === car.brand && filteredByBrand.push(car));
 			});
+
 			filteredCars = filteredByBrand;
 		}
 
 		if (usersFilterPreferences.years.some(option => option.isActive)) {
 			usersFilterPreferences.years.forEach(option => {
 				if (option.isActive) {
-					filteredCars = filteredCars.filter(car => {
-						if (option.value >= car.productionStartYear && option.value <= car.productionEndYear) {
-							return car;
-						}
-					});
-				} else {
-					return;
+					filteredCars = filteredCars.filter(
+						car => option.value >= car.productionStartYear && option.value <= car.productionEndYear && car
+					);
 				}
 			});
 		}
@@ -121,6 +114,10 @@ export const Dashboard = () => {
 	useEffect(() => {
 		handleFilterCars();
 	}, [usersFilterPreferences]);
+
+	useEffect(() => {
+		handleFilterCars();
+	}, [cars]);
 
 	return (
 		<Wrapper>

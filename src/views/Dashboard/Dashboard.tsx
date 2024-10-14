@@ -81,43 +81,35 @@ export const Dashboard = () => {
 	};
 
 	useEffect(() => {
-		filterCars();
+		handleFilterCars();
 	}, [cars]);
 
-	const filterCars = () => {
-		let filteredCars = (() => {
-			if (usersFilterPreferences.brands.some(option => option.isActive)) {
-				const filteredByBrand = [];
-				usersFilterPreferences.brands.forEach(option => {
-					if (option.isActive) {
-						cars.forEach(car => car.brand === option.value && filteredByBrand.push(car));
-					}
-				});
-				return filteredByBrand;
-			} else {
-				return cars;
-			}
-		})();
+	const handleFilterCars = () => {
+		let filteredCars = cars;
 
-		filteredCars = (() => {
-			if (usersFilterPreferences.years.some(option => option.isActive)) {
-				usersFilterPreferences.years.forEach(option => {
-					if (option.isActive) {
-						filteredCars = filteredCars.filter(car => {
-							if (option.value >= car.productionStartYear && option.value <= car.productionEndYear) {
-								return car;
-							}
-						});
-					} else {
-						return;
-					}
-				});
+		if (usersFilterPreferences.brands.some(option => option.isActive)) {
+			const filteredByBrand = [];
+			usersFilterPreferences.brands.forEach(option => {
+				if (option.isActive) {
+					cars.forEach(car => car.brand === option.value && filteredByBrand.push(car));
+				}
+			});
+			filteredCars = filteredByBrand;
+		}
 
-				return filteredCars;
-			} else {
-				return filteredCars;
-			}
-		})();
+		if (usersFilterPreferences.years.some(option => option.isActive)) {
+			usersFilterPreferences.years.forEach(option => {
+				if (option.isActive) {
+					filteredCars = filteredCars.filter(car => {
+						if (option.value >= car.productionStartYear && option.value <= car.productionEndYear) {
+							return car;
+						}
+					});
+				} else {
+					return;
+				}
+			});
+		}
 
 		setCarsToDisplay(filteredCars);
 	};
@@ -127,7 +119,7 @@ export const Dashboard = () => {
 	}, [isModalOpen]);
 
 	useEffect(() => {
-		filterCars();
+		handleFilterCars();
 	}, [usersFilterPreferences]);
 
 	return (

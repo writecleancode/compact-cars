@@ -8,16 +8,18 @@ type SortSelectProps = {
 	}[];
 };
 
-export const SortSelect = ({ options }: SortSelectProps) => {
+export const SortSelect = ({ options, handleSort }: SortSelectProps) => {
 	const [selectedValue, setSelectedValue] = useState(options[0].value);
 
-	const handleSelectedValue = (e: ChangeEvent<HTMLSelectElement>) => {
-		setSelectedValue(e.target.value);
+	const handleSelectedValueChange = (e: ChangeEvent<HTMLSelectElement>) => {
+		const selectedValue = e.target.value;
+		setSelectedValue(selectedValue);
+		handleSort(selectedValue);
 	};
 
 	return (
 		<Wrapper>
-			<StyledSelect value={selectedValue} onChange={handleSelectedValue}>
+			<StyledSelect value={selectedValue} onChange={handleSelectedValueChange}>
 				{options.map(({ value, text }) => (
 					<option key={value} value={value}>
 						{text}

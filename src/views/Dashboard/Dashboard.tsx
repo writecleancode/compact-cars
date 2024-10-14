@@ -9,11 +9,12 @@ import { selectOptions } from 'src/data/select';
 import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, SearchWrapper, Wrapper } from './Dashboard.styles';
 import { Modal } from 'src/components/organisms/Modal/Modal';
 
-const cars = carsData;
+// const cars = carsData;
 const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
 const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
 
 export const Dashboard = () => {
+	const [cars, setCars] = useState(carsData);
 	const [carsToDisplay, setCarsToDisplay] = useState(cars);
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
 	const [searchPhrase, setSearchPhrase] = useState('');
@@ -44,6 +45,44 @@ export const Dashboard = () => {
 		}));
 	};
 	// const handleFilterPreferences = clickedOption => {};   // - alternative name for funcion above
+
+	const getCarName = car => `${car.brand} ${car.model}`;
+
+	const getCarProductionYear = car => car.productionStartYear;
+
+	const sortCars = sortCriteria => {
+		const sortedCars = cars.toSorted((carA, carB) => {
+			if (sortCriteria.toLowerCase().includes('alphabet')) {
+				carA = getCarName(carA);
+				carB = getCarName(carB);
+
+				if (sortCriteria.toLowerCase().includes('reverse')) {
+					[carA, carB] = [carB, carA];
+				}
+			} else if (sortCriteria.toLowerCase().includes('year')) {
+				carA = getCarProductionYear(carA);
+				carB = getCarProductionYear(carB);
+
+				if (sortCriteria.toLowerCase().includes('reverse')) {
+					[carA, carB] = [carB, carA];
+				}
+			}
+
+			if (carA < carB) {
+				return -1;
+			} else if (carA > carB) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
+
+		setCars(sortedCars);
+	};
+
+	useEffect(() => {
+		filterCars();
+	}, [cars]);
 
 	const filterCars = () => {
 		let filteredCars = (() => {
@@ -95,7 +134,7 @@ export const Dashboard = () => {
 		<Wrapper>
 			<SearchWrapper>
 				<SearchInput value={searchPhrase} handleInputChange={handleSearchInputChange} />
-				<SortSelect options={selectOptions} />
+				<SortSelect options={selectOptions} handleSort={sortCars} />
 			</SearchWrapper>
 			<FiltersWrapper>
 				<ManageFiltersButton onClick={openModal}>manage filters</ManageFiltersButton>

@@ -20,7 +20,8 @@ type CarCardProps = {
 // export const CarCard = ({ brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl }: CarCardProps) => {
 export const CarCard = ({
 	$isPreviewCard = false,
-	car: { brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl },
+	handleCompareStatus,
+	car: { id, brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl, isCompared },
 }: CarCardProps) => {
 	return (
 		<Wrapper>
@@ -34,7 +35,7 @@ export const CarCard = ({
 				<CarInfoBox title='Facelift' content={facelift} />
 			</CarInfoWrapper>
 			<ButtonsWrapper>
-				<CompareButton isCompared={false} />
+				<CompareButton isCompared={isCompared} onClick={() => handleCompareStatus(id)} />
 				{$isPreviewCard ? null : (
 					<DeleteButton aria-label='delete car'>
 						<TrashIcon />

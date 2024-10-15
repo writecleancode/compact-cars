@@ -14,9 +14,10 @@ const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: 
 const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
 
 let filteredCars = [];
+const updatedCarsList = carsData.map(car => ({ ...car, isCompared: false }));
 
 export const Dashboard = () => {
-	const [cars, setCars] = useState(carsData);
+	const [cars, setCars] = useState(updatedCarsList);
 	const [carsToDisplay, setCarsToDisplay] = useState(cars);
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
 	const [searchPhrase, setSearchPhrase] = useState('');
@@ -121,6 +122,23 @@ export const Dashboard = () => {
 		handleSearchCars();
 	};
 
+	const handleCompareStatus = clickedCarId => {
+		const carIndex = cars.map(car => car.id).indexOf(clickedCarId);
+
+		setCars(prevState => [
+			...prevState.slice(0, carIndex),
+			{
+				...prevState[carIndex],
+				isCompared: !prevState[carIndex].isCompared,
+			},
+			...prevState.slice(carIndex + 1),
+		]);
+		// setCars(prevState => {
+		// 	console.log([...prevState.slice(0, carIndex), ...prevState.slice(carIndex + 1)]);
+		// 	return prevState;
+		// });
+	};
+
 	useEffect(() => {
 		isModalOpen ? document.body.classList.add('preventScroll') : document.body.classList.remove('preventScroll');
 	}, [isModalOpen]);
@@ -153,7 +171,7 @@ export const Dashboard = () => {
 			</FiltersWrapper>
 			<CarCardsWrapper>
 				{carsToDisplay.map(car => (
-					<CarCard key={car.id} car={car} />
+					<CarCard key={car.id} car={car} handleCompareStatus={handleCompareStatus} />
 				))}
 			</CarCardsWrapper>
 		</Wrapper>

@@ -13,6 +13,8 @@ import { Modal } from 'src/components/organisms/Modal/Modal';
 const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
 const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
 
+let filteredCars = [];
+
 export const Dashboard = () => {
 	const [cars, setCars] = useState(carsData);
 	const [carsToDisplay, setCarsToDisplay] = useState(cars);
@@ -20,8 +22,20 @@ export const Dashboard = () => {
 	const [searchPhrase, setSearchPhrase] = useState('');
 	const [isModalOpen, setModalState] = useState(false);
 
+	const handleSearchCars = (inputValue = searchPhrase) => {
+		if (cars === filteredCars) {
+			const matchingCars = cars.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()));
+			setCarsToDisplay(matchingCars);
+		} else {
+			const matchingCars = filteredCars.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()));
+			setCarsToDisplay(matchingCars);
+		}
+	};
+
 	const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setSearchPhrase(e.target.value);
+		const inputValue = e.target.value;
+		setSearchPhrase(inputValue);
+		handleSearchCars(inputValue);
 	};
 
 	const openModal = () => setModalState(true);
@@ -81,7 +95,7 @@ export const Dashboard = () => {
 	};
 
 	const handleFilterCars = () => {
-		let filteredCars = cars;
+		filteredCars = cars;
 
 		if (usersFilterPreferences.brands.some(option => option.isActive)) {
 			const filteredByBrand = [];
@@ -104,7 +118,7 @@ export const Dashboard = () => {
 			});
 		}
 
-		setCarsToDisplay(filteredCars);
+		handleSearchCars();
 	};
 
 	useEffect(() => {

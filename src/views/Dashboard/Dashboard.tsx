@@ -3,7 +3,7 @@ import { cars as carsData } from 'src/data/cars';
 import { filterBrands, filterYears } from 'src/data/filters';
 import { FilterBox } from 'src/components/molecules/FilterBox/FilterBox';
 import { SearchInput } from 'src/components/atoms/SearchInput/SearchInput';
-import { SortSelect } from 'src/components/atoms/SortSelect';
+import { SortSelect } from 'src/components/atoms/SortSelect/SortSelect';
 import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { selectOptions } from 'src/data/select';
 import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, SearchWrapper, Wrapper } from './Dashboard.styles';

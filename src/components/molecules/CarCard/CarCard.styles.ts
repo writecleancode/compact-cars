@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { StyledButton } from 'src/components/atoms/StyledButton/StyledButton';
 
 export const Wrapper = styled.div`
-	/* position: relative; */
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	padding: 0.8rem;
@@ -29,4 +30,26 @@ export const CarInfoWrapper = styled.div`
 	flex-direction: column;
 	gap: 1.2rem;
 	margin-top: 0.8rem;
+`;
+
+export const ButtonsWrapper = styled.div`
+	position: absolute;
+	bottom: 0.6rem;
+	right: 0.6rem;
+	display: grid;
+	grid-template-rows: repeat(2, 1fr);
+	gap: 0.4rem;
+`;
+
+export const DeleteButton = styled(StyledButton)`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.4rem 0.6rem;
+	fill: #fff;
+	transition: fill 0.3s;
+
+	&:hover {
+		fill: #555;
+	}
 `;

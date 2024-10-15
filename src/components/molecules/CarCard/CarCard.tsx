@@ -1,7 +1,10 @@
 import { CarInfoBox } from 'src/components/atoms/CarInfoBox/CarInfoBox';
-import { CarImg, CarInfoWrapper, CarName, Wrapper } from './CarCard.styles';
+import { TrashIcon } from 'src/assets/icons/TrashIcon';
+import { ButtonsWrapper, CarImg, CarInfoWrapper, CarName, DeleteButton, Wrapper } from './CarCard.styles';
+import { CompareButton } from 'src/components/atoms/CompareButton/CompareButton';
 
 type CarCardProps = {
+	$isPreviewCard?: boolean;
 	car: {
 		id: string;
 		brand: string;
@@ -15,7 +18,10 @@ type CarCardProps = {
 };
 
 // export const CarCard = ({ brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl }: CarCardProps) => {
-export const CarCard = ({ car: { brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl } }: CarCardProps) => {
+export const CarCard = ({
+	$isPreviewCard = false,
+	car: { brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl },
+}: CarCardProps) => {
 	return (
 		<Wrapper>
 			<CarName>
@@ -27,6 +33,19 @@ export const CarCard = ({ car: { brand, model, generation, productionStartYear, 
 				<CarInfoBox title='Production years' content={`${productionStartYear} - ${productionEndYear}`} />
 				<CarInfoBox title='Facelift' content={facelift} />
 			</CarInfoWrapper>
+			<ButtonsWrapper>
+				<CompareButton isCompared={false} />
+				{$isPreviewCard ? null : (
+					<DeleteButton aria-label='delete car'>
+						<TrashIcon />
+					</DeleteButton>
+					// {$isPreviewCard ? null : (
+					// 	<DeleteButton onClick={() => handleRemoveCar(id)} aria-label='delete car'>
+					// 		<TrashIcon />
+					// 	</DeleteButton>
+					// )}
+				)}
+			</ButtonsWrapper>
 		</Wrapper>
 	);
 };

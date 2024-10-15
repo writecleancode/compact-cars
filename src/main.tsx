@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Root } from './views/Root.tsx';
 import './assets/styles/fonts.css';
 import { Dashboard } from './views/Dashboard/Dashboard.tsx';
+import { CarComparison } from './views/CarComparison/CarComparison.tsx';
 
 const router = createBrowserRouter([
 	{
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'cars-comparison',
-				element: <div>Cars comparison - Work in progress...</div>,
+				element: <CarComparison />,
 			},
 			{
 				path: 'add-car',

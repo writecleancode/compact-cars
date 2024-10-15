@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div<{ $isNavActive: boolean }>`
 	position: absolute;
-	z-index: 1;
+	z-index: 2;
 	translate: ${({ $isNavActive }) => ($isNavActive ? '0' : '-100%')};
 	padding: 2.4rem;
 	border-right: 1px solid #d8d8d8;
@@ -60,7 +60,7 @@ export const BackgroundTint = styled.div<{ $isNavActive: boolean }>`
 	min-height: 100vh;
 	min-height: 100svh;
 	background-color: rgba(0, 0, 0, 0.3);
-	z-index: 0;
+	z-index: 1;
 	opacity: ${({ $isNavActive }) => ($isNavActive ? '1' : '0')};
 	transition: opacity 0.1s;
 `;

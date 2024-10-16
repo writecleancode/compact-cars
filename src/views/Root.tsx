@@ -4,6 +4,7 @@ import { GlobalStyle } from 'src/assets/styles/GlobalStyle';
 import { MainTemplate } from 'src/components/templates/MainTemplate/MainTemplate';
 import { Header } from 'src/components/atoms/Header/Header';
 import { NavBar } from 'src/components/organisms/NavBar/NavBar';
+import { cars } from 'src/data/cars';
 
 export const Root = () => {
 	const currentRoute = useLocation();
@@ -28,7 +29,7 @@ export const Root = () => {
 				<Header isNavActive={isNavActive} handleMobileNav={handleMobileNav} />
 				<NavBar isNavActive={isNavActive} closeMobileNav={closeMobileNav} />
 			</MainTemplate>
-			<Outlet />
+			<Outlet context={cars} />
 		</div>
 	);
 };

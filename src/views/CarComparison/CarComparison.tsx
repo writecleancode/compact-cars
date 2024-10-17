@@ -11,6 +11,12 @@ export const CarComparison = () => {
 					<StyledTable>
 						<tbody>
 							<tr>
+								<th></th>
+								{cars.map(car => (
+									<td key={car.id} data-brand={car.brand}></td>
+								))}
+							</tr>
+							<tr>
 								<th>Brand</th>
 								{cars.map(car => (
 									<td key={car.id}>{car.brand}</td>

@@ -8,16 +8,18 @@ import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { selectOptions } from 'src/data/select';
 import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, SearchWrapper, Wrapper } from './Dashboard.styles';
 import { Modal } from 'src/components/organisms/Modal/Modal';
+import { useOutletContext } from 'react-router-dom';
 
 // const cars = carsData;
 const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
 const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
 
 let filteredCars = [];
-const updatedCarsList = carsData.map(car => ({ ...car, isCompared: false }));
+// const updatedCarsList = carsData.map(car => ({ ...car, isCompared: false }));
 
 export const Dashboard = () => {
-	const [cars, setCars] = useState(updatedCarsList);
+	// const [cars, setCars] = useState(updatedCarsList);
+	const { cars, setCars } = useOutletContext();
 	const [carsToDisplay, setCarsToDisplay] = useState(cars);
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
 	const [searchPhrase, setSearchPhrase] = useState('');
@@ -133,10 +135,6 @@ export const Dashboard = () => {
 			},
 			...prevState.slice(carIndex + 1),
 		]);
-		// setCars(prevState => {
-		// 	console.log([...prevState.slice(0, carIndex), ...prevState.slice(carIndex + 1)]);
-		// 	return prevState;
-		// });
 	};
 
 	useEffect(() => {

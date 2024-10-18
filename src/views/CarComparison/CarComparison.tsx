@@ -4,6 +4,19 @@ import { StyledParagraph, StyledTable, TableWrapper, Wrapper } from './CarCompar
 export const CarComparison = () => {
 	const { cars } = useOutletContext();
 
+	const createTds = keyName => {
+		switch (keyName) {
+			case 'emblem':
+				return cars.map(car => (car.isCompared ? <td key={car.id} data-brand={car.brand}></td> : null));
+
+			case 'generation':
+				return cars.map(car => (car.isCompared ? <td key={car.id}>{car[keyName].replace(/ .*/, ' ')}</td> : null));
+
+			default:
+				return cars.map(car => (car.isCompared ? <td key={car.id}>{car[keyName]}</td> : null));
+		}
+	};
+
 	return (
 		<Wrapper>
 			{cars.some(car => car.isCompared) ? (
@@ -12,31 +25,31 @@ export const CarComparison = () => {
 						<tbody>
 							<tr>
 								<th></th>
-								{cars.map(car => (car.isCompared ? <td key={car.id} data-brand={car.brand}></td> : null))}
+								{createTds('emblem')}
 							</tr>
 							<tr>
 								<th>Brand</th>
-								{cars.map(car => (car.isCompared ? <td key={car.id}>{car.brand}</td> : null))}
+								{createTds('brand')}
 							</tr>
 							<tr>
 								<th>Model</th>
-								{cars.map(car => (car.isCompared ? <td key={car.id}>{car.model}</td> : null))}
+								{createTds('model')}
 							</tr>
 							<tr>
 								<th>Generation</th>
-								{cars.map(car => (car.isCompared ? <td key={car.id}>{car.generation.replace(/ .*/, ' ')}</td> : null))}
+								{createTds('generation')}
 							</tr>
 							<tr>
 								<th>Production start</th>
-								{cars.map(car => (car.isCompared ? <td key={car.id}>{car.productionStartYear}</td> : null))}
+								{createTds('productionStartYear')}
 							</tr>
 							<tr>
 								<th>Production end</th>
-								{cars.map(car => (car.isCompared ? <td key={car.id}>{car.productionEndYear}</td> : null))}
+								{createTds('productionEndYear')}
 							</tr>
 							<tr>
 								<th>Facelift</th>
-								{cars.map(car => (car.isCompared ? <td key={car.id}>{car.facelift}</td> : null))}
+								{createTds('facelift')}
 							</tr>
 						</tbody>
 					</StyledTable>

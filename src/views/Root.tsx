@@ -25,10 +25,6 @@ export const Root = () => {
 		isNavActive ? document.body.classList.add('preventScroll') : document.body.classList.remove('preventScroll');
 	}, [isNavActive]);
 
-	useEffect(() => {
-		console.log(cars);
-	}, [cars]);
-
 	return (
 		<div>
 			<GlobalStyle />

@@ -1,5 +1,4 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { cars as carsData } from 'src/data/cars';
 import { filterBrands, filterYears } from 'src/data/filters';
 import { FilterBox } from 'src/components/molecules/FilterBox/FilterBox';
 import { SearchInput } from 'src/components/atoms/SearchInput/SearchInput';

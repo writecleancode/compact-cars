@@ -19,7 +19,7 @@ type CarCardProps = {
 
 // export const CarCard = ({ brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl }: CarCardProps) => {
 export const CarCard = ({
-	$isPreviewCard = false,
+	isPreviewCard = false,
 	handleCompareStatus,
 	isCompared,
 	car: { id, brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl },
@@ -35,19 +35,14 @@ export const CarCard = ({
 				<CarInfoBox title='Production years' content={`${productionStartYear} - ${productionEndYear}`} />
 				<CarInfoBox title='Facelift' content={facelift} />
 			</CarInfoWrapper>
-			<ButtonsWrapper>
-				<CompareButton isCompared={isCompared} onClick={() => handleCompareStatus(id)} />
-				{$isPreviewCard ? null : (
+			{isPreviewCard ? null : (
+				<ButtonsWrapper>
+					<CompareButton isCompared={isCompared} onClick={() => handleCompareStatus(id)} />
 					<DeleteButton aria-label='delete car'>
 						<TrashIcon />
 					</DeleteButton>
-					// {$isPreviewCard ? null : (
-					// 	<DeleteButton onClick={() => handleRemoveCar(id)} aria-label='delete car'>
-					// 		<TrashIcon />
-					// 	</DeleteButton>
-					// )}
-				)}
-			</ButtonsWrapper>
+				</ButtonsWrapper>
+			)}
 		</Wrapper>
 	);
 };

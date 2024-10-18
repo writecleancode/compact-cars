@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<{ $hasExtraMargin?: boolean }>`
+	margin-top: ${({ $hasExtraMargin }) => ($hasExtraMargin ? '1.6rem' : '')};
 	padding: 0.8rem 1.6rem;
 	border: 2px solid #555555;
 	background-color: #555555;

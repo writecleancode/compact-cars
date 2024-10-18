@@ -6,6 +6,7 @@ export const Wrapper = styled.div<{ $isNavActive: boolean }>`
 	z-index: 2;
 	translate: ${({ $isNavActive }) => ($isNavActive ? '0' : '-100%')};
 	padding: 2.4rem;
+	padding-right: 3.2rem;
 	border-right: 1px solid #d8d8d8;
 	height: 100%;
 	min-height: 100vh;

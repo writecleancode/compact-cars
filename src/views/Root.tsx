@@ -29,7 +29,7 @@ export const Root = () => {
 			<GlobalStyle />
 			<MainTemplate>
 				<Header isNavActive={isNavActive} handleMobileNav={handleMobileNav} />
-				<NavBar isNavActive={isNavActive} closeMobileNav={closeMobileNav} />
+				<NavBar isNavActive={isNavActive} closeMobileNav={closeMobileNav} comparedCarsNumber={comparedCars.length} />
 			</MainTemplate>
 			<Outlet context={{ cars, setCars, comparedCars, setComparedCars }} />
 		</div>

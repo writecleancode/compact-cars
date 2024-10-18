@@ -1,7 +1,7 @@
 // import { NavLink } from 'react-router-dom';
 import { BackgroundTint, NavLink, NavLinksList, Wrapper } from './NavBar.styles';
 
-export const NavBar = ({ isNavActive, closeMobileNav }) => {
+export const NavBar = ({ isNavActive, comparedCarsNumber, closeMobileNav }) => {
 	return (
 		<>
 			<Wrapper $isNavActive={isNavActive}>
@@ -10,7 +10,7 @@ export const NavBar = ({ isNavActive, closeMobileNav }) => {
 						<NavLink to='/'>Dashboard</NavLink>
 					</li>
 					<li>
-						<NavLink to='/cars-comparison'>Comparison (1)</NavLink>
+						<NavLink to='/cars-comparison'>Comparison {comparedCarsNumber > 0 ? `(${comparedCarsNumber})` : null}</NavLink>
 					</li>
 					<li>
 						<NavLink to='/add-car'>Add car</NavLink>

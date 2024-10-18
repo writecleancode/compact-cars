@@ -2,24 +2,24 @@ import { useOutletContext } from 'react-router-dom';
 import { StyledParagraph, StyledTable, TableWrapper, Wrapper } from './CarComparison.styles';
 
 export const CarComparison = () => {
-	const { cars } = useOutletContext();
+	const { comparedCars } = useOutletContext();
 
 	const createTds = keyName => {
 		switch (keyName) {
 			case 'emblem':
-				return cars.map(car => (car.isCompared ? <td key={car.id} data-brand={car.brand}></td> : null));
+				return comparedCars.map(car => <td key={car.id} data-brand={car.brand}></td>);
 
 			case 'generation':
-				return cars.map(car => (car.isCompared ? <td key={car.id}>{car[keyName].replace(/ .*/, ' ')}</td> : null));
+				return comparedCars.map(car => <td key={car.id}>{car[keyName].replace(/ .*/, ' ')}</td>);
 
 			default:
-				return cars.map(car => (car.isCompared ? <td key={car.id}>{car[keyName]}</td> : null));
+				return comparedCars.map(car => <td key={car.id}>{car[keyName]}</td>);
 		}
 	};
 
 	return (
 		<Wrapper>
-			{cars.some(car => car.isCompared) ? (
+			{comparedCars.length > 0 ? (
 				<TableWrapper>
 					<StyledTable>
 						<tbody>

@@ -21,7 +21,8 @@ type CarCardProps = {
 export const CarCard = ({
 	$isPreviewCard = false,
 	handleCompareStatus,
-	car: { id, brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl, isCompared },
+	isCompared,
+	car: { id, brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl },
 }: CarCardProps) => {
 	return (
 		<Wrapper>

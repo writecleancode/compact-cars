@@ -18,7 +18,7 @@ let filteredCars = [];
 
 export const Dashboard = () => {
 	// const [cars, setCars] = useState(updatedCarsList);
-	const { cars, setCars } = useOutletContext();
+	const { cars, setCars, comparedCars, setComparedCars } = useOutletContext();
 	const [carsToDisplay, setCarsToDisplay] = useState(cars);
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
 	const [searchPhrase, setSearchPhrase] = useState('');
@@ -124,16 +124,24 @@ export const Dashboard = () => {
 	};
 
 	const handleCompareStatus = clickedCarId => {
-		const carIndex = cars.map(car => car.id).indexOf(clickedCarId);
+		if (comparedCars.some(car => car.id === clickedCarId)) {
+			const carIndex = comparedCars.map(car => car.id).indexOf(clickedCarId);
+			setComparedCars(prevState => [...prevState.slice(0, carIndex), ...prevState.slice(carIndex + 1)]);
+		} else {
+			const clickedCar = cars.find(car => car.id === clickedCarId);
+			setComparedCars(prevState => [...prevState, clickedCar]);
+		}
 
-		setCars(prevState => [
-			...prevState.slice(0, carIndex),
-			{
-				...prevState[carIndex],
-				isCompared: !prevState[carIndex].isCompared,
-			},
-			...prevState.slice(carIndex + 1),
-		]);
+		// const carIndex = cars.map(car => car.id).indexOf(clickedCarId);
+
+		// setCars(prevState => [
+		// 	...prevState.slice(0, carIndex),
+		// 	{
+		// 		...prevState[carIndex],
+		// 		isCompared: !prevState[carIndex].isCompared,
+		// 	},
+		// 	...prevState.slice(carIndex + 1),
+		// ]);
 	};
 
 	useEffect(() => {
@@ -168,7 +176,12 @@ export const Dashboard = () => {
 			</FiltersWrapper>
 			<CarCardsWrapper>
 				{carsToDisplay.map(car => (
-					<CarCard key={car.id} car={car} handleCompareStatus={handleCompareStatus} />
+					<CarCard
+						key={car.id}
+						car={car}
+						handleCompareStatus={handleCompareStatus}
+						isCompared={comparedCars.some(comparedCar => comparedCar.id === car.id)}
+					/>
 				))}
 			</CarCardsWrapper>
 		</Wrapper>

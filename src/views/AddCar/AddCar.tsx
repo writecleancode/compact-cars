@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import { Form } from 'src/components/organisms/Form/Form';
 import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { PreviewTitle, PreviewWrapper, Wrapper } from './AddCar.styles';
-import { SuccessMessage } from 'src/components/atoms/SuccessMessage/SuccessMessage';
+import { SuccessNotification } from 'src/components/atoms/SuccessNotification/SuccessNotification';
 
 const initialFormValues = {
 	brand: 'Daewoo',
@@ -57,9 +57,8 @@ export const AddCar = () => {
 				<CarCard car={formValues} isPreviewCard />
 			</PreviewWrapper>
 			{successNotifications.length > 0
-				? successNotifications.map(id => <SuccessMessage key={id}>✔ Car added to the list</SuccessMessage>)
+				? successNotifications.map(id => <SuccessNotification key={id}>✔ Car added to the list</SuccessNotification>)
 				: null}
-			{/* {success ? <SuccessMessage>✔ Car added to the list</SuccessMessage> : null} */}
 		</Wrapper>
 	);
 };

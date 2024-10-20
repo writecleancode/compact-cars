@@ -18,7 +18,7 @@ const slideInOut = keyframes`
     }
 `;
 
-export const SuccessMessage = styled.span`
+export const SuccessNotification = styled.span`
 	position: fixed;
 	top: 0.8rem;
 	left: 50%;
@@ -26,7 +26,7 @@ export const SuccessMessage = styled.span`
 	transform: translateY(-120%);
 	border: 1px solid #cdcdcd;
 	padding: 1.6rem 2.4rem;
-    width: max-content;
+	width: max-content;
 	background-color: #fff;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.22);
 	animation: ${slideInOut} 2s;

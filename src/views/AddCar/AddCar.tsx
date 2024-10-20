@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import { Form } from 'src/components/organisms/Form/Form';
 import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { PreviewTitle, PreviewWrapper, Wrapper } from './AddCar.styles';
+import { SuccessMessage } from 'src/components/atoms/SuccessMessage/SuccessMessage';
 
 const initialFormValues = {
 	brand: 'Daewoo',
@@ -18,6 +19,8 @@ const initialFormValues = {
 export const AddCar = () => {
 	const { setCars } = useOutletContext();
 	const [formValues, setFormValues] = useState(initialFormValues);
+	// const [success, setSuccesState] = useState(false);
+	const [successStatements, setSuccessStatements] = useState([]);
 
 	const handleInputChange = e => {
 		setFormValues(prevState => ({
@@ -26,6 +29,24 @@ export const AddCar = () => {
 		}));
 	};
 
+	const handleSuccessMessage = () => {
+		const id = uuid();
+		setSuccessStatements(prevState => [...prevState, id]);
+
+		const removeSuccessMessage = id => {
+			setSuccessStatements(prevState => prevState.filter(el => el !== id));
+		};
+
+		setTimeout(() => removeSuccessMessage(id), 2000);
+	};
+
+	// const handleSuccessMessage = () => {
+	// 	setSuccesState(true);
+	// 	setTimeout(() => {
+	// 		setSuccesState(false);
+	// 	}, 2000);
+	// };
+
 	const handleSubmitForm = e => {
 		e.preventDefault();
 		const newCar = {
@@ -33,6 +54,7 @@ export const AddCar = () => {
 			...formValues,
 		};
 		setCars(prevState => [newCar, ...prevState]);
+		handleSuccessMessage();
 	};
 
 	return (
@@ -42,6 +64,8 @@ export const AddCar = () => {
 				<PreviewTitle>Live preview</PreviewTitle>
 				<CarCard car={formValues} isPreviewCard />
 			</PreviewWrapper>
+			{successStatements.length > 0 ? successStatements.map(id => <SuccessMessage key={id}>✔ Car added to the list</SuccessMessage>) : null}
+			{/* {success ? <SuccessMessage>✔ Car added to the list</SuccessMessage> : null} */}
 		</Wrapper>
 	);
 };

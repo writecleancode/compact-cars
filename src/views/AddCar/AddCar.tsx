@@ -28,13 +28,13 @@ export const AddCar = () => {
 		}));
 	};
 
+	const removeSuccessNotification = id => {
+		setSuccessNotifications(prevState => prevState.filter(el => el !== id));
+	};
+
 	const handleSuccessNotifications = () => {
 		const id = uuid();
 		setSuccessNotifications(prevState => [...prevState, id]);
-
-		const removeSuccessNotification = id => {
-			setSuccessNotifications(prevState => prevState.filter(el => el !== id));
-		};
 
 		setTimeout(() => removeSuccessNotification(id), 2000);
 	};

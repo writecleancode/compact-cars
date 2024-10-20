@@ -19,8 +19,7 @@ const initialFormValues = {
 export const AddCar = () => {
 	const { setCars } = useOutletContext();
 	const [formValues, setFormValues] = useState(initialFormValues);
-	// const [success, setSuccesState] = useState(false);
-	const [successStatements, setSuccessStatements] = useState([]);
+	const [successNotifications, setSuccessNotifications] = useState([]);
 
 	const handleInputChange = e => {
 		setFormValues(prevState => ({
@@ -29,23 +28,16 @@ export const AddCar = () => {
 		}));
 	};
 
-	const handleSuccessMessage = () => {
+	const handleSuccessNotifications = () => {
 		const id = uuid();
-		setSuccessStatements(prevState => [...prevState, id]);
+		setSuccessNotifications(prevState => [...prevState, id]);
 
-		const removeSuccessMessage = id => {
-			setSuccessStatements(prevState => prevState.filter(el => el !== id));
+		const removeSuccessNotification = id => {
+			setSuccessNotifications(prevState => prevState.filter(el => el !== id));
 		};
 
-		setTimeout(() => removeSuccessMessage(id), 2000);
+		setTimeout(() => removeSuccessNotification(id), 2000);
 	};
-
-	// const handleSuccessMessage = () => {
-	// 	setSuccesState(true);
-	// 	setTimeout(() => {
-	// 		setSuccesState(false);
-	// 	}, 2000);
-	// };
 
 	const handleSubmitForm = e => {
 		e.preventDefault();
@@ -54,7 +46,7 @@ export const AddCar = () => {
 			...formValues,
 		};
 		setCars(prevState => [newCar, ...prevState]);
-		handleSuccessMessage();
+		handleSuccessNotifications();
 	};
 
 	return (
@@ -64,7 +56,9 @@ export const AddCar = () => {
 				<PreviewTitle>Live preview</PreviewTitle>
 				<CarCard car={formValues} isPreviewCard />
 			</PreviewWrapper>
-			{successStatements.length > 0 ? successStatements.map(id => <SuccessMessage key={id}>✔ Car added to the list</SuccessMessage>) : null}
+			{successNotifications.length > 0
+				? successNotifications.map(id => <SuccessMessage key={id}>✔ Car added to the list</SuccessMessage>)
+				: null}
 			{/* {success ? <SuccessMessage>✔ Car added to the list</SuccessMessage> : null} */}
 		</Wrapper>
 	);

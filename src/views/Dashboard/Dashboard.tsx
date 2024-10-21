@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { filterBrands, filterYears } from 'src/data/filters';
 import { FilterBox } from 'src/components/molecules/FilterBox/FilterBox';
 import { SearchInput } from 'src/components/atoms/SearchInput/SearchInput';
@@ -8,6 +8,7 @@ import { selectOptions } from 'src/data/select';
 import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, SearchWrapper, Wrapper } from './Dashboard.styles';
 import { Modal } from 'src/components/organisms/Modal/Modal';
 import { useOutletContext } from 'react-router-dom';
+import debounce from 'lodash.debounce';
 
 const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
 const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
@@ -26,15 +27,18 @@ export const Dashboard = () => {
 	const [searchPhrase, setSearchPhrase] = useState('');
 	const [isModalOpen, setModalState] = useState(false);
 
-	const handleSearchCars = (inputValue = searchPhrase) => {
-		if (cars === filteredCars) {
-			const matchingCars = cars.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()));
-			setCarsToDisplay(matchingCars);
-		} else {
-			const matchingCars = filteredCars.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()));
-			setCarsToDisplay(matchingCars);
-		}
-	};
+	const handleSearchCars = useCallback(
+		debounce((inputValue = searchPhrase) => {
+			if (cars === filteredCars) {
+				const matchingCars = cars.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()));
+				setCarsToDisplay(matchingCars);
+			} else {
+				const matchingCars = filteredCars.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()));
+				setCarsToDisplay(matchingCars);
+			}
+		}, 500),
+		[]
+	);
 
 	const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const inputValue = e.target.value;

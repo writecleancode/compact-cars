@@ -1,6 +1,10 @@
+import { useContext } from 'react';
+import { NavContext } from 'src/providers/NavProvider';
 import { Wrapper } from './BurgerButton.styles';
 
-export const BurgerButton = ({ isNavActive, handleMobileNav }) => {
+export const BurgerButton = () => {
+	const { isNavActive, handleMobileNav } = useContext(NavContext);
+
 	return (
 		<Wrapper $isActive={isNavActive} onClick={handleMobileNav}>
 			<span className='burger-line burger-line--top'></span>
@@ -9,11 +13,3 @@ export const BurgerButton = ({ isNavActive, handleMobileNav }) => {
 		</Wrapper>
 	);
 };
-
-/*!
- * Hamburgers
- * @description Tasty CSS-animated hamburgers
- * @author Jonathan Suh @jonsuh
- * @site https://jonsuh.com/hamburgers
- * @link https://github.com/jonsuh/hamburgers
- */

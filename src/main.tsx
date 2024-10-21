@@ -1,6 +1,7 @@
 import './assets/styles/fonts.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { NavProvider } from './providers/NavProvider.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Root } from './views/Root.tsx';
 import { Dashboard } from './views/Dashboard/Dashboard.tsx';
@@ -30,6 +31,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<RouterProvider router={router} />
+		<NavProvider>
+			<RouterProvider router={router} />
+		</NavProvider>
 	</StrictMode>
 );

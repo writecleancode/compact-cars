@@ -20,8 +20,9 @@ type CarCardProps = {
 // export const CarCard = ({ brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl }: CarCardProps) => {
 export const CarCard = ({
 	isPreviewCard = false,
-	handleCompareStatus,
 	isCompared,
+	handleCompareStatus,
+	handleRemoveCar,
 	car: { id, brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl },
 }: CarCardProps) => {
 	return (
@@ -38,7 +39,7 @@ export const CarCard = ({
 			{isPreviewCard ? null : (
 				<ButtonsWrapper>
 					<CompareButton isCompared={isCompared} onClick={() => handleCompareStatus(id)} />
-					<DeleteButton aria-label='delete car'>
+					<DeleteButton aria-label='delete car' onClick={() => handleRemoveCar(id)}>
 						<TrashIcon />
 					</DeleteButton>
 				</ButtonsWrapper>

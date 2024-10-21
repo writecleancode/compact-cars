@@ -5,7 +5,7 @@ import { SearchInput } from 'src/components/atoms/SearchInput/SearchInput';
 import { SortSelect } from 'src/components/atoms/SortSelect/SortSelect';
 import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { selectOptions } from 'src/data/select';
-import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, SearchWrapper, Wrapper } from './Dashboard.styles';
+import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, SearchWrapper, Wrapper } from './Dashboard.styles';
 import { Modal } from 'src/components/organisms/Modal/Modal';
 import { useOutletContext } from 'react-router-dom';
 
@@ -144,6 +144,11 @@ export const Dashboard = () => {
 		// ]);
 	};
 
+	const handleRemoveCar = clickedId => {
+		const filteredCars = cars.filter(car => car.id !== clickedId);
+		setCars(filteredCars);
+	};
+
 	useEffect(() => {
 		isModalOpen ? document.body.classList.add('preventScroll') : document.body.classList.remove('preventScroll');
 	}, [isModalOpen]);
@@ -175,14 +180,19 @@ export const Dashboard = () => {
 				</Modal>
 			</FiltersWrapper>
 			<CarCardsWrapper>
-				{carsToDisplay.map(car => (
-					<CarCard
-						key={car.id}
-						car={car}
-						handleCompareStatus={handleCompareStatus}
-						isCompared={comparedCars.some(comparedCar => comparedCar.id === car.id)}
-					/>
-				))}
+				{carsToDisplay.length > 0 ? (
+					carsToDisplay.map(car => (
+						<CarCard
+							key={car.id}
+							car={car}
+							isCompared={comparedCars.some(comparedCar => comparedCar.id === car.id)}
+							handleCompareStatus={handleCompareStatus}
+							handleRemoveCar={handleRemoveCar}
+						/>
+					))
+				) : (
+					<NoCarsInfo>There are no cars to display...</NoCarsInfo>
+				)}
 			</CarCardsWrapper>
 		</Wrapper>
 	);

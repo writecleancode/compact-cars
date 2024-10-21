@@ -42,3 +42,9 @@ export const CarCardsWrapper = styled.div`
 /* grid-template-columns: 1fr 1fr 1fr; */
 /* gap: 3.2rem; */
 // `;
+
+export const NoCarsInfo = styled.p`
+	grid-column: 1 / 3;
+	margin-top: 5.6rem;
+	text-align: center;
+`;

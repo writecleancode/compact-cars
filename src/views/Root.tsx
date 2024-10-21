@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { cars as carsData } from 'src/data/cars';
 import { GlobalStyle } from 'src/assets/styles/GlobalStyle';
-import { MainTemplate } from 'src/components/templates/MainTemplate/MainTemplate';
 import { Header } from 'src/components/atoms/Header/Header';
 import { NavBar } from 'src/components/organisms/NavBar/NavBar';
-import { cars as carsData } from 'src/data/cars';
 
 export const Root = () => {
 	const currentRoute = useLocation();
@@ -27,10 +26,10 @@ export const Root = () => {
 	return (
 		<div>
 			<GlobalStyle />
-			<MainTemplate>
+			<div>
 				<Header isNavActive={isNavActive} handleMobileNav={handleMobileNav} />
 				<NavBar isNavActive={isNavActive} closeMobileNav={closeMobileNav} comparedCarsNumber={comparedCars.length} />
-			</MainTemplate>
+			</div>
 			<Outlet context={{ cars, setCars, comparedCars, setComparedCars }} />
 		</div>
 	);

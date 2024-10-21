@@ -17,6 +17,7 @@ let filteredCars = [];
 export const Dashboard = () => {
 	const { cars, setCars, comparedCars, setComparedCars } = useOutletContext();
 	const [carsToDisplay, setCarsToDisplay] = useState(cars);
+	const [selectedSortValue, setSelectedSortValue] = useState('');
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
 	const [searchPhrase, setSearchPhrase] = useState('');
 	const [isModalOpen, setModalState] = useState(false);
@@ -93,6 +94,12 @@ export const Dashboard = () => {
 		setCars(sortedCars);
 	};
 
+	const handleSelectedValueChange = (e: ChangeEvent<HTMLSelectElement>) => {
+		const selectedValue = e.target.value;
+		setSelectedSortValue(selectedValue);
+		sortCars(selectedValue);
+	};
+
 	const handleFilterCars = () => {
 		filteredCars = cars;
 
@@ -151,7 +158,7 @@ export const Dashboard = () => {
 		<Wrapper>
 			<SearchWrapper>
 				<SearchInput value={searchPhrase} handleInputChange={handleSearchInputChange} />
-				<SortSelect options={selectOptions} handleSort={sortCars} />
+				<SortSelect options={selectOptions} defaultOption='sort cars' selectedValue={selectedSortValue} handleSelectedValueChange={handleSelectedValueChange} />
 			</SearchWrapper>
 			<FiltersWrapper>
 				<ManageFiltersButton onClick={openModal}>manage filters</ManageFiltersButton>

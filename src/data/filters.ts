@@ -9,6 +9,7 @@ export const filterBrands: FilterBrands = [
 	'Audi',
 	'BMW',
 	'Citroen',
+	'Daewoo',
 	'Fiat',
 	'Ford',
 	'Honda',

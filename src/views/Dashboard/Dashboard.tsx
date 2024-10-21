@@ -14,6 +14,10 @@ const filterYearsData = filterYears.map(option => ({ value: option, isActive: fa
 
 let filteredCars = [];
 
+const getCarName = car => `${car.brand} ${car.model}`;
+
+const getCarProductionYear = car => car.productionStartYear;
+
 export const Dashboard = () => {
 	const { cars, setCars, comparedCars, setComparedCars } = useOutletContext();
 	const [carsToDisplay, setCarsToDisplay] = useState(cars);
@@ -60,26 +64,18 @@ export const Dashboard = () => {
 	};
 	// const handleFilterPreferences = clickedOption => {};   // - alternative name for funcion above
 
-	const getCarName = car => `${car.brand} ${car.model}`;
-
-	const getCarProductionYear = car => car.productionStartYear;
-
-	const sortCars = sortCriteria => {
+	const sortCars = (sortCriteria = 'byAlphabet') => {
 		const sortedCars = cars.toSorted((carA, carB) => {
 			if (sortCriteria.toLowerCase().includes('alphabet')) {
 				carA = getCarName(carA);
 				carB = getCarName(carB);
-
-				if (sortCriteria.toLowerCase().includes('reverse')) {
-					[carA, carB] = [carB, carA];
-				}
 			} else if (sortCriteria.toLowerCase().includes('year')) {
 				carA = getCarProductionYear(carA);
 				carB = getCarProductionYear(carB);
+			}
 
-				if (sortCriteria.toLowerCase().includes('reverse')) {
-					[carA, carB] = [carB, carA];
-				}
+			if (sortCriteria.toLowerCase().includes('reverse')) {
+				[carA, carB] = [carB, carA];
 			}
 
 			if (carA < carB) {
@@ -158,7 +154,12 @@ export const Dashboard = () => {
 		<Wrapper>
 			<SearchWrapper>
 				<SearchInput value={searchPhrase} handleInputChange={handleSearchInputChange} />
-				<SortSelect options={selectOptions} defaultOption='sort cars' selectedValue={selectedSortValue} handleSelectedValueChange={handleSelectedValueChange} />
+				<SortSelect
+					options={selectOptions}
+					defaultOption='sort cars'
+					selectedValue={selectedSortValue}
+					handleSelectedValueChange={handleSelectedValueChange}
+				/>
 			</SearchWrapper>
 			<FiltersWrapper>
 				<ManageFiltersButton onClick={openModal}>manage filters</ManageFiltersButton>

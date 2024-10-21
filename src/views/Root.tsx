@@ -8,7 +8,7 @@ import { NavBar } from 'src/components/organisms/NavBar/NavBar';
 
 export const Root = () => {
 	const currentRoute = useLocation();
-	const { isNavActive, closeMobileNav } = useContext(NavContext);
+	const { closeMobileNav } = useContext(NavContext);
 	const [cars, setCars] = useState(carsData);
 	const [comparedCars, setComparedCars] = useState([]);
 
@@ -21,7 +21,7 @@ export const Root = () => {
 			<GlobalStyle />
 			<div>
 				<Header />
-				<NavBar isNavActive={isNavActive} closeMobileNav={closeMobileNav} comparedCarsNumber={comparedCars.length} />
+				<NavBar comparedCarsNumber={comparedCars.length} />
 			</div>
 			<Outlet context={{ cars, setCars, comparedCars, setComparedCars }} />
 		</div>

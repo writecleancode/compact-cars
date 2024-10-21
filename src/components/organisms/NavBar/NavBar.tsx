@@ -1,7 +1,11 @@
 // import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { NavContext } from 'src/providers/NavProvider';
 import { BackgroundTint, NavLink, NavLinksList, Wrapper } from './NavBar.styles';
 
-export const NavBar = ({ isNavActive, comparedCarsNumber, closeMobileNav }) => {
+export const NavBar = ({ comparedCarsNumber = 0 }) => {
+	const { isNavActive, closeMobileNav } = useContext(NavContext);
+
 	return (
 		<>
 			<Wrapper $isNavActive={isNavActive}>

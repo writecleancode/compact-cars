@@ -1,5 +1,5 @@
-import { NavLink as RouterNavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { NavLink as RouterNavLink } from 'react-router-dom';
 
 export const Wrapper = styled.div<{ $isNavActive: boolean }>`
 	position: absolute;
@@ -57,11 +57,11 @@ export const BackgroundTint = styled.div<{ $isNavActive: boolean }>`
 	position: absolute;
 	left: 0;
 	right: 0;
+	z-index: 1;
 	height: 100%;
 	min-height: 100vh;
 	min-height: 100svh;
 	background-color: rgba(0, 0, 0, 0.3);
-	z-index: 1;
 	opacity: ${({ $isNavActive }) => ($isNavActive ? '1' : '0')};
 	transition: opacity 0.1s;
 `;

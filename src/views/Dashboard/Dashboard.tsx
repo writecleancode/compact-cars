@@ -9,15 +9,12 @@ import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, Searc
 import { Modal } from 'src/components/organisms/Modal/Modal';
 import { useOutletContext } from 'react-router-dom';
 
-// const cars = carsData;
 const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
 const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
 
 let filteredCars = [];
-// const updatedCarsList = carsData.map(car => ({ ...car, isCompared: false }));
 
 export const Dashboard = () => {
-	// const [cars, setCars] = useState(updatedCarsList);
 	const { cars, setCars, comparedCars, setComparedCars } = useOutletContext();
 	const [carsToDisplay, setCarsToDisplay] = useState(cars);
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
@@ -131,17 +128,6 @@ export const Dashboard = () => {
 			const clickedCar = cars.find(car => car.id === clickedCarId);
 			setComparedCars(prevState => [...prevState, clickedCar]);
 		}
-
-		// const carIndex = cars.map(car => car.id).indexOf(clickedCarId);
-
-		// setCars(prevState => [
-		// 	...prevState.slice(0, carIndex),
-		// 	{
-		// 		...prevState[carIndex],
-		// 		isCompared: !prevState[carIndex].isCompared,
-		// 	},
-		// 	...prevState.slice(carIndex + 1),
-		// ]);
 	};
 
 	const handleRemoveCar = clickedId => {

@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-	/* padding: 4rem; */
-	/* margin-left: auto; */
-	/* margin-right: auto; */
-	/* height: calc(100vh - 88px); */
-	/* width: 100%; */
-	/* overflow-y: scroll; */
-`;
-
 export const FiltersWrapper = styled.div`
 	padding: 0.8rem 0.8rem 0.4rem;
 	/* background-color: #d9d9d9; */

@@ -1,23 +1,23 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { Car, Cars } from 'src/types/types';
 import { filterBrands, filterYears } from 'src/data/filters';
-import { FilterBox } from 'src/components/molecules/FilterBox/FilterBox';
-import { SearchInput } from 'src/components/atoms/SearchInput/SearchInput';
-import { SortSelect } from 'src/components/atoms/SortSelect/SortSelect';
-import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { selectOptions } from 'src/data/select';
-import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, SearchWrapper, Wrapper } from './Dashboard.styles';
-import { Modal } from 'src/components/organisms/Modal/Modal';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import debounce from 'lodash.debounce';
+import { SearchInput } from 'src/components/atoms/SearchInput/SearchInput';
+import { SortSelect } from 'src/components/atoms/SortSelect/SortSelect';
+import { Modal } from 'src/components/organisms/Modal/Modal';
+import { FilterBox } from 'src/components/molecules/FilterBox/FilterBox';
+import { CarCard } from 'src/components/molecules/CarCard/CarCard';
+import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, SearchWrapper } from './Dashboard.styles';
 
 const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
 const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
 
-let filteredCars = [];
+let filteredCars: Cars = [];
 
-const getCarName = car => `${car.brand} ${car.model}`;
-
-const getCarProductionYear = car => car.productionStartYear;
+const getCarName = (car: Car) => `${car.brand} ${car.model}`;
+const getCarProductionYear = (car: Car) => car.productionStartYear;
 
 export const Dashboard = () => {
 	const { cars, setCars, comparedCars, setComparedCars } = useOutletContext();
@@ -155,7 +155,7 @@ export const Dashboard = () => {
 	}, [cars]);
 
 	return (
-		<Wrapper>
+		<div>
 			<SearchWrapper>
 				<SearchInput value={searchPhrase} handleInputChange={handleSearchInputChange} />
 				<SortSelect
@@ -192,6 +192,6 @@ export const Dashboard = () => {
 					<NoCarsInfo>There are no cars to display...</NoCarsInfo>
 				)}
 			</CarCardsWrapper>
-		</Wrapper>
+		</div>
 	);
 };

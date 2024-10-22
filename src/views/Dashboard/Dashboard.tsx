@@ -27,11 +27,19 @@ export const Dashboard = () => {
 	const [searchPhrase, setSearchPhrase] = useState('');
 	const [isModalOpen, setModalState] = useState(false);
 
+	const findCars = (inputValue = searchPhrase) => {
+		const carsToCheck = cars === filteredCars ? cars : filteredCars;
+
+		const matchingCars = inputValue
+			? carsToCheck.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()))
+			: carsToCheck;
+			
+		return matchingCars;
+	};
+
 	const handleSearchCars = useCallback(
 		debounce((inputValue = searchPhrase) => {
-			const carsToCheck = cars === filteredCars ? cars : filteredCars;
-			const matchingCars = carsToCheck.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()));
-			setCarsToDisplay(matchingCars);
+			setCarsToDisplay(findCars(inputValue));
 		}, 500),
 		[]
 	);
@@ -119,7 +127,7 @@ export const Dashboard = () => {
 			});
 		}
 
-		handleSearchCars();
+		setCarsToDisplay(findCars());
 	};
 
 	const handleCompareStatus = clickedCarId => {

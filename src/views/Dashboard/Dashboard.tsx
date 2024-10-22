@@ -30,6 +30,21 @@ export const Dashboard = () => {
 	const openModal = () => setModalState(true);
 	const closeModal = () => setModalState(false);
 
+	const handleCompareStatus = clickedCarId => {
+		if (comparedCars.some(car => car.id === clickedCarId)) {
+			const carIndex = comparedCars.map(car => car.id).indexOf(clickedCarId);
+			setComparedCars(prevState => [...prevState.slice(0, carIndex), ...prevState.slice(carIndex + 1)]);
+		} else {
+			const clickedCar = cars.find(car => car.id === clickedCarId);
+			setComparedCars(prevState => [...prevState, clickedCar]);
+		}
+	};
+
+	const removeCar = clickedId => {
+		const filteredCars = cars.filter(car => car.id !== clickedId);
+		setCars(filteredCars);
+	};
+
 	const findCars = (inputValue = searchPhrase) => {
 		const carsToCheck = cars === filteredCars ? cars : filteredCars;
 
@@ -39,13 +54,6 @@ export const Dashboard = () => {
 
 		return matchingCars;
 	};
-
-	// ---------------------------------------------------------------------------------------------------------------------------------
-	// ---------------------------------------------------------------------------------------------------------------------------------
-	// ---------------------------------------------------------------------------------------------------------------------------------
-	// ---------------------------------------------------------------------------------------------------------------------------------
-	// ---------------------------------------------------------------------------------------------------------------------------------
-	// ---------------------------------------------------------------------------------------------------------------------------------
 
 	const filterCars = () => {
 		filteredCars = cars;
@@ -83,26 +91,7 @@ export const Dashboard = () => {
 		setCarsToDisplay(matchingCars);
 	};
 
-	// ---------------------------------------------------------------------------------------------------------------------------------
-	// ---------------------------------------------------------------------------------------------------------------------------------
-	// ---------------------------------------------------------------------------------------------------------------------------------
-	// ---------------------------------------------------------------------------------------------------------------------------------
-	// ---------------------------------------------------------------------------------------------------------------------------------
-	// ---------------------------------------------------------------------------------------------------------------------------------
-	const handleSearchCars = useCallback(
-		debounce(inputValue => {
-			setCarsToDisplay(findCars(inputValue));
-		}, 500),
-		[]
-	);
-
-	const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const inputValue = e.target.value;
-		setSearchPhrase(inputValue);
-		handleSearchCars(inputValue);
-	};
-
-	const handleFilterOptionActiveStatus = clickedOption => {
+	const handleFilterPreferences = clickedOption => {
 		const optionType = typeof clickedOption === 'number' ? 'years' : 'brands';
 		const clickedOptionIndex = usersFilterPreferences[optionType].map(option => option.value).indexOf(clickedOption);
 
@@ -118,7 +107,6 @@ export const Dashboard = () => {
 			],
 		}));
 	};
-	// const handleFilterPreferences = clickedOption => {};   // - alternative name for funcion above
 
 	const sortCars = (sortCriteria = 'byAlphabet') => {
 		const sortedCars = cars.toSorted((carA, carB) => {
@@ -146,52 +134,23 @@ export const Dashboard = () => {
 		setCars(sortedCars);
 	};
 
+	const handleSearchCars = useCallback(
+		debounce(inputValue => {
+			setCarsToDisplay(findCars(inputValue));
+		}, 500),
+		[]
+	);
+
+	const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const inputValue = e.target.value;
+		setSearchPhrase(inputValue);
+		handleSearchCars(inputValue);
+	};
+
 	const handleSelectedValueChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		const selectedValue = e.target.value;
 		setSelectedSortValue(selectedValue);
 		sortCars(selectedValue);
-	};
-
-	const handleFilterCars = () => {
-		filteredCars = cars;
-
-		if (usersFilterPreferences.brands.some(option => option.isActive)) {
-			const filteredByBrand = [];
-			const activeFilterClasses = usersFilterPreferences.brands.filter(option => option.isActive);
-
-			cars.forEach(car => {
-				activeFilterClasses.forEach(option => option.value === car.brand && filteredByBrand.push(car));
-			});
-
-			filteredCars = filteredByBrand;
-		}
-
-		if (usersFilterPreferences.years.some(option => option.isActive)) {
-			usersFilterPreferences.years.forEach(option => {
-				if (option.isActive) {
-					filteredCars = filteredCars.filter(
-						car => option.value >= car.productionStartYear && option.value <= car.productionEndYear && car
-					);
-				}
-			});
-		}
-
-		setCarsToDisplay(findCars());
-	};
-
-	const handleCompareStatus = clickedCarId => {
-		if (comparedCars.some(car => car.id === clickedCarId)) {
-			const carIndex = comparedCars.map(car => car.id).indexOf(clickedCarId);
-			setComparedCars(prevState => [...prevState.slice(0, carIndex), ...prevState.slice(carIndex + 1)]);
-		} else {
-			const clickedCar = cars.find(car => car.id === clickedCarId);
-			setComparedCars(prevState => [...prevState, clickedCar]);
-		}
-	};
-
-	const handleRemoveCar = clickedId => {
-		const filteredCars = cars.filter(car => car.id !== clickedId);
-		setCars(filteredCars);
 	};
 
 	useEffect(() => {
@@ -199,12 +158,10 @@ export const Dashboard = () => {
 	}, [isModalOpen]);
 
 	useEffect(() => {
-		// handleFilterCars();
 		handleDisplayCars();
 	}, [usersFilterPreferences]);
 
 	useEffect(() => {
-		// handleFilterCars();
 		handleDisplayCars();
 	}, [cars]);
 
@@ -226,9 +183,9 @@ export const Dashboard = () => {
 						title='Choose production year(s):'
 						options={usersFilterPreferences.years}
 						$isYears
-						handleFilter={handleFilterOptionActiveStatus}
+						handleFilter={handleFilterPreferences}
 					/>
-					<FilterBox title='Choose brand(s):' options={usersFilterPreferences.brands} handleFilter={handleFilterOptionActiveStatus} />
+					<FilterBox title='Choose brand(s):' options={usersFilterPreferences.brands} handleFilter={handleFilterPreferences} />
 				</Modal>
 			</FiltersWrapper>
 			<CarCardsWrapper>
@@ -239,7 +196,7 @@ export const Dashboard = () => {
 							car={car}
 							isCompared={comparedCars.some(comparedCar => comparedCar.id === car.id)}
 							handleCompareStatus={handleCompareStatus}
-							handleRemoveCar={handleRemoveCar}
+							removeCar={removeCar}
 						/>
 					))
 				) : (

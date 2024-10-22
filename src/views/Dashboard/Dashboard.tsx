@@ -27,18 +27,70 @@ export const Dashboard = () => {
 	const [searchPhrase, setSearchPhrase] = useState('');
 	const [isModalOpen, setModalState] = useState(false);
 
+	const openModal = () => setModalState(true);
+	const closeModal = () => setModalState(false);
+
 	const findCars = (inputValue = searchPhrase) => {
 		const carsToCheck = cars === filteredCars ? cars : filteredCars;
 
 		const matchingCars = inputValue
 			? carsToCheck.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()))
 			: carsToCheck;
-			
+
 		return matchingCars;
 	};
 
+	// ---------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------
+
+	const filterCars = () => {
+		filteredCars = cars;
+
+		if (usersFilterPreferences.brands.some(option => option.isActive)) {
+			const filteredByBrand = [];
+			const activeFilterClasses = usersFilterPreferences.brands.filter(option => option.isActive);
+
+			cars.forEach(car => {
+				activeFilterClasses.forEach(option => option.value === car.brand && filteredByBrand.push(car));
+			});
+
+			filteredCars = filteredByBrand;
+		}
+
+		if (usersFilterPreferences.years.some(option => option.isActive)) {
+			usersFilterPreferences.years.forEach(option => {
+				if (option.isActive) {
+					filteredCars = filteredCars.filter(
+						car => option.value >= car.productionStartYear && option.value <= car.productionEndYear && car
+					);
+				}
+			});
+		}
+
+		return filteredCars;
+	};
+
+	const handleDisplayCars = () => {
+		let matchingCars;
+
+		matchingCars = filterCars();
+		matchingCars = findCars();
+
+		setCarsToDisplay(matchingCars);
+	};
+
+	// ---------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------------------------------------------------------
 	const handleSearchCars = useCallback(
-		debounce((inputValue = searchPhrase) => {
+		debounce(inputValue => {
 			setCarsToDisplay(findCars(inputValue));
 		}, 500),
 		[]
@@ -49,9 +101,6 @@ export const Dashboard = () => {
 		setSearchPhrase(inputValue);
 		handleSearchCars(inputValue);
 	};
-
-	const openModal = () => setModalState(true);
-	const closeModal = () => setModalState(false);
 
 	const handleFilterOptionActiveStatus = clickedOption => {
 		const optionType = typeof clickedOption === 'number' ? 'years' : 'brands';
@@ -150,11 +199,13 @@ export const Dashboard = () => {
 	}, [isModalOpen]);
 
 	useEffect(() => {
-		handleFilterCars();
+		// handleFilterCars();
+		handleDisplayCars();
 	}, [usersFilterPreferences]);
 
 	useEffect(() => {
-		handleFilterCars();
+		// handleFilterCars();
+		handleDisplayCars();
 	}, [cars]);
 
 	return (

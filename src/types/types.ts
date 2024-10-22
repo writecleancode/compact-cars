@@ -13,6 +13,15 @@ export type Car = {
 
 export type Cars = Car[];
 
+export type comparedCars = never[] | Cars;
+
 export type NavProviderProps = {
 	children: ReactNode;
+};
+
+export type OutletContextType = {
+	cars: Cars;
+	setCars: React.Dispatch<React.SetStateAction<Cars>>;
+	comparedCars: comparedCars;
+	setComparedCars: React.Dispatch<React.SetStateAction<never[] | Cars>>;
 };

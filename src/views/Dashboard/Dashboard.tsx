@@ -2,7 +2,7 @@ import { Car, Cars } from 'src/types/types';
 import { filterBrands, filterYears } from 'src/data/filters';
 import { selectOptions } from 'src/data/select';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useCars } from 'src/hooks/useCars';
 import debounce from 'lodash.debounce';
 import { SearchInput } from 'src/components/atoms/SearchInput/SearchInput';
 import { SortSelect } from 'src/components/atoms/SortSelect/SortSelect';
@@ -20,7 +20,7 @@ const getCarName = (car: Car) => `${car.brand} ${car.model}`;
 const getCarProductionYear = (car: Car) => car.productionStartYear;
 
 export const Dashboard = () => {
-	const { cars, setCars, comparedCars, setComparedCars } = useOutletContext();
+	const { cars, setCars, comparedCars, setComparedCars } = useCars();
 	const [carsToDisplay, setCarsToDisplay] = useState(cars);
 	const [selectedSortValue, setSelectedSortValue] = useState('');
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });

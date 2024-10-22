@@ -1,3 +1,4 @@
+import { comparedCars, OutletContextType } from 'src/types/types';
 import { cars as carsData } from 'src/data/cars';
 import { useContext, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -10,7 +11,7 @@ export const Root = () => {
 	const currentRoute = useLocation();
 	const { closeMobileNav } = useContext(NavContext);
 	const [cars, setCars] = useState(carsData);
-	const [comparedCars, setComparedCars] = useState([]);
+	const [comparedCars, setComparedCars] = useState<comparedCars>([]);
 
 	useEffect(() => {
 		closeMobileNav();
@@ -23,7 +24,7 @@ export const Root = () => {
 				<Header />
 				<NavBar comparedCarsNumber={comparedCars.length} />
 			</div>
-			<Outlet context={{ cars, setCars, comparedCars, setComparedCars }} />
+			<Outlet context={{ cars, setCars, comparedCars, setComparedCars } satisfies OutletContextType} />
 		</div>
 	);
 };

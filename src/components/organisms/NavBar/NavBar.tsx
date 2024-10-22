@@ -1,4 +1,3 @@
-// import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { NavContext } from 'src/providers/NavProvider';
 import { BackgroundTint, NavLink, NavLinksList, Wrapper } from './NavBar.styles';

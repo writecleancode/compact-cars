@@ -2,8 +2,8 @@ import { Car, Cars } from 'src/types/types';
 import { filterBrands, filterYears } from 'src/data/filters';
 import { selectOptions } from 'src/data/select';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useCars } from 'src/hooks/useCars';
 import debounce from 'lodash.debounce';
+import { useCars } from 'src/hooks/useCars';
 import { SearchInput } from 'src/components/atoms/SearchInput/SearchInput';
 import { SortSelect } from 'src/components/atoms/SortSelect/SortSelect';
 import { Modal } from 'src/components/organisms/Modal/Modal';
@@ -29,13 +29,9 @@ export const Dashboard = () => {
 
 	const handleSearchCars = useCallback(
 		debounce((inputValue = searchPhrase) => {
-			if (cars === filteredCars) {
-				const matchingCars = cars.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()));
-				setCarsToDisplay(matchingCars);
-			} else {
-				const matchingCars = filteredCars.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()));
-				setCarsToDisplay(matchingCars);
-			}
+			const carsToCheck = cars === filteredCars ? cars : filteredCars;
+			const matchingCars = carsToCheck.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()));
+			setCarsToDisplay(matchingCars);
 		}, 500),
 		[]
 	);
@@ -47,7 +43,6 @@ export const Dashboard = () => {
 	};
 
 	const openModal = () => setModalState(true);
-
 	const closeModal = () => setModalState(false);
 
 	const handleFilterOptionActiveStatus = clickedOption => {

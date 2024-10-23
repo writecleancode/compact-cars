@@ -5,6 +5,15 @@ export const SearchWrapper = styled.div`
 	gap: 1.6rem;
 	padding: 0.8rem;
 	background-color: #d9d9d9;
+
+	@media (min-width: 440px) {
+		justify-content: space-between;
+	}
+
+	@media (min-width: 640px) {
+		position: relative;
+		justify-content: flex-end;
+	}
 `;
 
 export const FiltersWrapper = styled.div`

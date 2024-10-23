@@ -13,7 +13,15 @@ export type Car = {
 
 export type Cars = Car[];
 
+export type CarsProviderProps = {
+	children: ReactNode;
+};
+
 export type comparedCars = never[] | Cars;
+
+export type ModalProviderProps = {
+	children: ReactNode;
+};
 
 export type NavProviderProps = {
 	children: ReactNode;

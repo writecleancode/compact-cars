@@ -1,15 +1,17 @@
 import { Car, Cars } from 'src/types/types';
 import { filterBrands, filterYears } from 'src/data/filters';
 import { selectOptions } from 'src/data/select';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import debounce from 'lodash.debounce';
+import { ChangeEvent, useCallback, useContext, useEffect, useState } from 'react';
+import { CarsContext } from 'src/providers/CarsProvider';
 import { useCars } from 'src/hooks/useCars';
+import debounce from 'lodash.debounce';
 import { SearchInput } from 'src/components/atoms/SearchInput/SearchInput';
 import { SortSelect } from 'src/components/atoms/SortSelect/SortSelect';
 import { Modal } from 'src/components/organisms/Modal/Modal';
 import { FilterBox } from 'src/components/molecules/FilterBox/FilterBox';
 import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, SearchWrapper } from './Dashboard.styles';
+import { ModalContext } from 'src/providers/ModalProvider';
 
 const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
 const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
@@ -21,14 +23,11 @@ const getCarProductionYear = (car: Car) => car.productionStartYear;
 
 export const Dashboard = () => {
 	const { cars, setCars, comparedCars, setComparedCars } = useCars();
-	const [carsToDisplay, setCarsToDisplay] = useState(cars);
+	const { carsToDisplay, setCarsToDisplay } = useContext(CarsContext);
+	const { isModalOpen, openModal, closeModal } = useContext(ModalContext);
 	const [selectedSortValue, setSelectedSortValue] = useState('');
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
 	const [searchPhrase, setSearchPhrase] = useState('');
-	const [isModalOpen, setModalState] = useState(false);
-
-	const openModal = () => setModalState(true);
-	const closeModal = () => setModalState(false);
 
 	const handleCompareStatus = clickedCarId => {
 		if (comparedCars.some(car => car.id === clickedCarId)) {
@@ -38,11 +37,6 @@ export const Dashboard = () => {
 			const clickedCar = cars.find(car => car.id === clickedCarId);
 			setComparedCars(prevState => [...prevState, clickedCar]);
 		}
-	};
-
-	const removeCar = clickedId => {
-		const filteredCars = cars.filter(car => car.id !== clickedId);
-		setCars(filteredCars);
 	};
 
 	const findCars = (inputValue = searchPhrase) => {
@@ -154,8 +148,8 @@ export const Dashboard = () => {
 	};
 
 	useEffect(() => {
-		isModalOpen ? document.body.classList.add('preventScroll') : document.body.classList.remove('preventScroll');
-	}, [isModalOpen]);
+		setCarsToDisplay(cars);
+	}, []);
 
 	useEffect(() => {
 		handleDisplayCars();
@@ -196,7 +190,6 @@ export const Dashboard = () => {
 							car={car}
 							isCompared={comparedCars.some(comparedCar => comparedCar.id === car.id)}
 							handleCompareStatus={handleCompareStatus}
-							removeCar={removeCar}
 						/>
 					))
 				) : (

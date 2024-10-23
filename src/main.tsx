@@ -2,6 +2,8 @@ import './assets/styles/fonts.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { NavProvider } from './providers/NavProvider.tsx';
+import { CarsProvider } from './providers/CarsProvider.tsx';
+import { ModalProvider } from './providers/ModalProvider.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Root } from './views/Root.tsx';
 import { Dashboard } from './views/Dashboard/Dashboard.tsx';
@@ -32,7 +34,11 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<NavProvider>
-			<RouterProvider router={router} />
+			<CarsProvider>
+				<ModalProvider>
+					<RouterProvider router={router} />
+				</ModalProvider>
+			</CarsProvider>
 		</NavProvider>
 	</StrictMode>
 );

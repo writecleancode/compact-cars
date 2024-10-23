@@ -2,6 +2,8 @@ import { CarInfoBox } from 'src/components/atoms/CarInfoBox/CarInfoBox';
 import { TrashIcon } from 'src/assets/icons/TrashIcon';
 import { ButtonsWrapper, CarImg, CarInfoWrapper, CarName, DeleteButton, Wrapper } from './CarCard.styles';
 import { CompareButton } from 'src/components/atoms/CompareButton/CompareButton';
+import { useContext } from 'react';
+import { CarsContext } from 'src/providers/CarsProvider';
 
 type CarCardProps = {
 	$isPreviewCard?: boolean;
@@ -22,9 +24,10 @@ export const CarCard = ({
 	isPreviewCard = false,
 	isCompared,
 	handleCompareStatus,
-	removeCar,
 	car: { id, brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl },
 }: CarCardProps) => {
+	const { removeCar } = useContext(CarsContext);
+
 	return (
 		<Wrapper>
 			<CarName>

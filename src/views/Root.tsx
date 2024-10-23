@@ -1,17 +1,16 @@
-import { comparedCars, OutletContextType } from 'src/types/types';
-import { cars as carsData } from 'src/data/cars';
-import { useContext, useEffect, useState } from 'react';
+import { OutletContextType } from 'src/types/types';
+import { useContext, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { NavContext } from 'src/providers/NavProvider';
 import { GlobalStyle } from 'src/assets/styles/GlobalStyle';
 import { Header } from 'src/components/atoms/Header/Header';
 import { NavBar } from 'src/components/organisms/NavBar/NavBar';
+import { CarsContext } from 'src/providers/CarsProvider';
 
 export const Root = () => {
 	const currentRoute = useLocation();
 	const { closeMobileNav } = useContext(NavContext);
-	const [cars, setCars] = useState(carsData);
-	const [comparedCars, setComparedCars] = useState<comparedCars>([]);
+	const { cars, setCars, comparedCars, setComparedCars } = useContext(CarsContext);
 
 	useEffect(() => {
 		closeMobileNav();

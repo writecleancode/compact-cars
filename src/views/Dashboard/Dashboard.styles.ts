@@ -51,13 +51,11 @@ export const CarCardsWrapper = styled.div`
 	grid-template-columns: repeat(2, 1fr);
 	gap: 1rem;
 	padding: 1.2rem;
-`;
 
-// export const CarsWrapper = styled.div`
-/* display: grid; */
-/* grid-template-columns: 1fr 1fr 1fr; */
-/* gap: 3.2rem; */
-// `;
+	@media (min-width: 614px) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+`;
 
 export const NoCarsInfo = styled.p`
 	grid-column: 1 / 3;

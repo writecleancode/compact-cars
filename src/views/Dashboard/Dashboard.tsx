@@ -8,7 +8,7 @@ import { SortSelect } from 'src/components/atoms/SortSelect/SortSelect';
 import { Modal } from 'src/components/organisms/Modal/Modal';
 import { FilterBox } from 'src/components/molecules/FilterBox/FilterBox';
 import { CarCard } from 'src/components/molecules/CarCard/CarCard';
-import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, SearchWrapper } from './Dashboard.styles';
+import { CarCardsWrapper, ControlsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, SearchWrapper } from './Dashboard.styles';
 import { ModalContext } from 'src/providers/ModalProvider';
 
 export const Dashboard = () => {
@@ -61,27 +61,20 @@ export const Dashboard = () => {
 
 	return (
 		<div>
-			<SearchWrapper>
-				<SearchInput value={searchPhrase} handleInputChange={handleSearchInputChange} />
-				<SortSelect
-					options={selectOptions}
-					defaultOption='sort cars'
-					selectedValue={selectedSortValue}
-					handleSelectedValueChange={handleSelectedValueChange}
-				/>
-			</SearchWrapper>
-			<FiltersWrapper>
-				<ManageFiltersButton onClick={openModal}>manage filters</ManageFiltersButton>
-				<Modal isOpen={isModalOpen} closeModal={closeModal}>
-					<FilterBox
-						title='Choose production year(s):'
-						options={usersFilterPreferences.years}
-						$isYears
-						handleFilter={handleFilterPreferences}
+			<ControlsWrapper>
+				<SearchWrapper>
+					<SearchInput value={searchPhrase} handleInputChange={handleSearchInputChange} />
+					<SortSelect
+						options={selectOptions}
+						defaultOption='sort cars'
+						selectedValue={selectedSortValue}
+						handleSelectedValueChange={handleSelectedValueChange}
 					/>
-					<FilterBox title='Choose brand(s):' options={usersFilterPreferences.brands} handleFilter={handleFilterPreferences} />
-				</Modal>
-			</FiltersWrapper>
+				</SearchWrapper>
+				<FiltersWrapper>
+					<ManageFiltersButton onClick={openModal}>manage filters</ManageFiltersButton>
+				</FiltersWrapper>
+			</ControlsWrapper>
 			<CarCardsWrapper>
 				{carsToDisplay.length > 0 ? (
 					carsToDisplay.map(car => (
@@ -91,6 +84,15 @@ export const Dashboard = () => {
 					<NoCarsInfo>There are no cars to display...</NoCarsInfo>
 				)}
 			</CarCardsWrapper>
+			<Modal isOpen={isModalOpen} closeModal={closeModal}>
+				<FilterBox
+					title='Choose production year(s):'
+					options={usersFilterPreferences.years}
+					$isYears
+					handleFilter={handleFilterPreferences}
+				/>
+				<FilterBox title='Choose brand(s):' options={usersFilterPreferences.brands} handleFilter={handleFilterPreferences} />
+			</Modal>
 		</div>
 	);
 };

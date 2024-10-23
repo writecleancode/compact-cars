@@ -10,7 +10,7 @@ import { CarsContext } from 'src/providers/CarsProvider';
 export const Root = () => {
 	const currentRoute = useLocation();
 	const { closeMobileNav } = useContext(NavContext);
-	const { cars, setCars, comparedCars, setComparedCars } = useContext(CarsContext);
+	const { cars, comparedCars } = useContext(CarsContext);
 
 	useEffect(() => {
 		closeMobileNav();
@@ -23,7 +23,7 @@ export const Root = () => {
 				<Header />
 				<NavBar comparedCarsNumber={comparedCars.length} />
 			</div>
-			<Outlet context={{ cars, setCars, comparedCars, setComparedCars } satisfies OutletContextType} />
+			<Outlet context={{ cars, comparedCars } satisfies OutletContextType} />
 		</div>
 	);
 };

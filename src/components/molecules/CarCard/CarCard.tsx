@@ -23,10 +23,9 @@ type CarCardProps = {
 export const CarCard = ({
 	isPreviewCard = false,
 	isCompared,
-	handleCompareStatus,
 	car: { id, brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl },
 }: CarCardProps) => {
-	const { removeCar } = useContext(CarsContext);
+	const { removeCar, handleCompareStatus } = useContext(CarsContext);
 
 	return (
 		<Wrapper>

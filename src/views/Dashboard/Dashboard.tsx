@@ -1,5 +1,3 @@
-import { Car, Cars } from 'src/types/types';
-import { filterBrands, filterYears } from 'src/data/filters';
 import { selectOptions } from 'src/data/select';
 import { ChangeEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { CarsContext } from 'src/providers/CarsProvider';
@@ -13,119 +11,21 @@ import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { CarCardsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, SearchWrapper } from './Dashboard.styles';
 import { ModalContext } from 'src/providers/ModalProvider';
 
-const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
-const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
-
-let filteredCars: Cars = [];
-
-const getCarName = (car: Car) => `${car.brand} ${car.model}`;
-const getCarProductionYear = (car: Car) => car.productionStartYear;
-
 export const Dashboard = () => {
-	const { cars, setCars, comparedCars, setComparedCars } = useCars();
-	const { carsToDisplay, setCarsToDisplay } = useContext(CarsContext);
+	const { cars, comparedCars } = useCars();
+	const { carsToDisplay, setCarsToDisplay, usersFilterPreferences, handleFilterPreferences, sortCars, findCars, filterCars } =
+		useContext(CarsContext);
 	const { isModalOpen, openModal, closeModal } = useContext(ModalContext);
 	const [selectedSortValue, setSelectedSortValue] = useState('');
-	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
 	const [searchPhrase, setSearchPhrase] = useState('');
-
-	const handleCompareStatus = clickedCarId => {
-		if (comparedCars.some(car => car.id === clickedCarId)) {
-			const carIndex = comparedCars.map(car => car.id).indexOf(clickedCarId);
-			setComparedCars(prevState => [...prevState.slice(0, carIndex), ...prevState.slice(carIndex + 1)]);
-		} else {
-			const clickedCar = cars.find(car => car.id === clickedCarId);
-			setComparedCars(prevState => [...prevState, clickedCar]);
-		}
-	};
-
-	const findCars = (inputValue = searchPhrase) => {
-		const carsToCheck = cars === filteredCars ? cars : filteredCars;
-
-		const matchingCars = inputValue
-			? carsToCheck.filter(car => `${car.brand} ${car.model}`.toLowerCase().includes(inputValue.toLowerCase()))
-			: carsToCheck;
-
-		return matchingCars;
-	};
-
-	const filterCars = () => {
-		filteredCars = cars;
-
-		if (usersFilterPreferences.brands.some(option => option.isActive)) {
-			const filteredByBrand = [];
-			const activeFilterClasses = usersFilterPreferences.brands.filter(option => option.isActive);
-
-			cars.forEach(car => {
-				activeFilterClasses.forEach(option => option.value === car.brand && filteredByBrand.push(car));
-			});
-
-			filteredCars = filteredByBrand;
-		}
-
-		if (usersFilterPreferences.years.some(option => option.isActive)) {
-			usersFilterPreferences.years.forEach(option => {
-				if (option.isActive) {
-					filteredCars = filteredCars.filter(
-						car => option.value >= car.productionStartYear && option.value <= car.productionEndYear && car
-					);
-				}
-			});
-		}
-
-		return filteredCars;
-	};
 
 	const handleDisplayCars = () => {
 		let matchingCars;
 
 		matchingCars = filterCars();
-		matchingCars = findCars();
+		matchingCars = findCars(searchPhrase);
 
 		setCarsToDisplay(matchingCars);
-	};
-
-	const handleFilterPreferences = clickedOption => {
-		const optionType = typeof clickedOption === 'number' ? 'years' : 'brands';
-		const clickedOptionIndex = usersFilterPreferences[optionType].map(option => option.value).indexOf(clickedOption);
-
-		setUsersFilterPreferences(prevState => ({
-			...prevState,
-			[optionType]: [
-				...prevState[optionType].slice(0, clickedOptionIndex),
-				{
-					...prevState[optionType][clickedOptionIndex],
-					isActive: !prevState[optionType][clickedOptionIndex].isActive,
-				},
-				...prevState[optionType].slice(clickedOptionIndex + 1),
-			],
-		}));
-	};
-
-	const sortCars = (sortCriteria = 'byAlphabet') => {
-		const sortedCars = cars.toSorted((carA, carB) => {
-			if (sortCriteria.toLowerCase().includes('alphabet')) {
-				carA = getCarName(carA);
-				carB = getCarName(carB);
-			} else if (sortCriteria.toLowerCase().includes('year')) {
-				carA = getCarProductionYear(carA);
-				carB = getCarProductionYear(carB);
-			}
-
-			if (sortCriteria.toLowerCase().includes('reverse')) {
-				[carA, carB] = [carB, carA];
-			}
-
-			if (carA < carB) {
-				return -1;
-			} else if (carA > carB) {
-				return 1;
-			} else {
-				return 0;
-			}
-		});
-
-		setCars(sortedCars);
 	};
 
 	const handleSearchCars = useCallback(
@@ -185,12 +85,7 @@ export const Dashboard = () => {
 			<CarCardsWrapper>
 				{carsToDisplay.length > 0 ? (
 					carsToDisplay.map(car => (
-						<CarCard
-							key={car.id}
-							car={car}
-							isCompared={comparedCars.some(comparedCar => comparedCar.id === car.id)}
-							handleCompareStatus={handleCompareStatus}
-						/>
+						<CarCard key={car.id} car={car} isCompared={comparedCars.some(comparedCar => comparedCar.id === car.id)} />
 					))
 				) : (
 					<NoCarsInfo>There are no cars to display...</NoCarsInfo>

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export type Car = {
+export type CarType = {
 	id: string;
 	brand: string;
 	model: string;
@@ -11,13 +11,38 @@ export type Car = {
 	imgUrl: string;
 };
 
-export type Cars = Car[];
+export type CarsType = CarType[];
+
+type usersFilterPreferencesType = {
+	brands: {
+		value: string;
+		isActive: boolean;
+	}[];
+	years: {
+		value: number;
+		isActive: boolean;
+	}[];
+};
+
+export type CarsContextType = {
+	cars: CarsType;
+	carsToDisplay: CarsType;
+	setCarsToDisplay: React.Dispatch<React.SetStateAction<CarsType>>;
+	comparedCars: CarsType;
+	usersFilterPreferences: {} | usersFilterPreferencesType;
+	handleFilterPreferences: (clickedOption: string | number) => void;
+	removeCar: (clickedId: string) => void;
+	sortCars: (sortCriteria: string) => void;
+	findCars: (() => []) | ((inputValue: string) => CarsType);
+	filterCars: () => CarsType;
+	handleCompareStatus: (clickedCarId: string) => void;
+};
 
 export type CarsProviderProps = {
 	children: ReactNode;
 };
 
-export type comparedCars = never[] | Cars;
+export type comparedCarsType = never[] | CarsType;
 
 export type ModalProviderProps = {
 	children: ReactNode;
@@ -28,8 +53,6 @@ export type NavProviderProps = {
 };
 
 export type OutletContextType = {
-	cars: Cars;
-	setCars: React.Dispatch<React.SetStateAction<Cars>>;
-	comparedCars: comparedCars;
-	setComparedCars: React.Dispatch<React.SetStateAction<never[] | Cars>>;
+	cars: CarsType;
+	comparedCars: comparedCarsType;
 };

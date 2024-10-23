@@ -11,9 +11,11 @@ export const SortSelect = ({ options, defaultOption, selectedValue, handleSelect
 	return (
 		<Wrapper>
 			<StyledSelect value={selectedValue} onChange={handleSelectedValueChange} aria-label='sort cars'>
-				<option value={''} disabled>
-					{defaultOption}
-				</option>
+				{defaultOption ? (
+					<option value={''} disabled>
+						{defaultOption}
+					</option>
+				) : null}
 				{options.map(({ value, text }) => (
 					<option key={value} value={value}>
 						{text}

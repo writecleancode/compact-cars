@@ -1,11 +1,6 @@
-import { ChangeEvent } from 'react';
+import { SearchInputProps } from 'src/types/types';
 import { SearchIcon } from 'src/assets/icons/SearchIcon';
 import { IconBox, Input, Wrapper } from './SearchInput.styles';
-
-type SearchInputProps = {
-	value: string;
-	handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};
 
 export const SearchInput = ({ value, handleInputChange }: SearchInputProps) => {
 	return (

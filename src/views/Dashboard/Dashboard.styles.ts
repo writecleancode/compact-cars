@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const SearchWrapper = styled.div`
+	display: flex;
+	gap: 1.6rem;
+	padding: 0.8rem;
+	background-color: #d9d9d9;
+`;
+
 export const FiltersWrapper = styled.div`
 	padding: 0.8rem 0.8rem 0.4rem;
 	/* background-color: #d9d9d9; */
@@ -9,16 +16,6 @@ export const ManageFiltersButton = styled.button`
 	display: block;
 	padding: 0.3rem;
 	width: 100%;
-`;
-
-export const SearchWrapper = styled.div`
-	display: flex;
-	gap: 1.6rem;
-	padding: 0.8rem;
-	background-color: #d9d9d9;
-	/* position: relative; */
-	/* margin-bottom: 4rem; */
-	/* height: 31px; */
 `;
 
 export const CarCardsWrapper = styled.div`

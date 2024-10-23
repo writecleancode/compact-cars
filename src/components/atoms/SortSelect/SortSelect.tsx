@@ -1,11 +1,5 @@
+import { SortSelectProps } from 'src/types/types';
 import { StyledSelect, Wrapper } from './SortSelect.styles';
-
-type SortSelectProps = {
-	options: {
-		value: string;
-		text: string;
-	}[];
-};
 
 export const SortSelect = ({ options, defaultOption, selectedValue, handleSelectedValueChange }: SortSelectProps) => {
 	return (

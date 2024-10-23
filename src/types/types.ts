@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 
 export type CarType = {
 	id: string;
@@ -55,4 +55,19 @@ export type NavProviderProps = {
 export type OutletContextType = {
 	cars: CarsType;
 	comparedCars: comparedCarsType;
+};
+
+export type SearchInputProps = {
+	value: string;
+	handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type SortSelectProps = {
+	options: {
+		value: string;
+		text: string;
+	}[];
+	defaultOption: string;
+	selectedValue: string;
+	handleSelectedValueChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 };

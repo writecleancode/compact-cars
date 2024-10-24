@@ -10,8 +10,10 @@ import { FilterBox } from 'src/components/molecules/FilterBox/FilterBox';
 import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { CarCardsWrapper, ControlsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, SearchWrapper } from './Dashboard.styles';
 import { ModalContext } from 'src/providers/ModalProvider';
+import { LoadingAnimation } from 'src/components/atoms/LoadingAnimation/LoadingAnimation';
 
 export const Dashboard = () => {
+	const [isLoading, setLoadingState] = useState(true);
 	const { cars, comparedCars } = useCars();
 	const { carsToDisplay, setCarsToDisplay, usersFilterPreferences, handleFilterPreferences, sortCars, findCars, filterCars } =
 		useContext(CarsContext);
@@ -49,6 +51,7 @@ export const Dashboard = () => {
 
 	useEffect(() => {
 		setCarsToDisplay(cars);
+		setLoadingState(false);
 	}, []);
 
 	useEffect(() => {
@@ -75,15 +78,20 @@ export const Dashboard = () => {
 					<ManageFiltersButton onClick={openModal}>manage filters</ManageFiltersButton>
 				</FiltersWrapper>
 			</ControlsWrapper>
-			<CarCardsWrapper>
-				{carsToDisplay.length > 0 ? (
-					carsToDisplay.map(car => (
-						<CarCard key={car.id} car={car} isCompared={comparedCars.some(comparedCar => comparedCar.id === car.id)} />
-					))
-				) : (
-					<NoCarsInfo>There are no cars to display...</NoCarsInfo>
-				)}
-			</CarCardsWrapper>
+			{isLoading ? (
+				<LoadingAnimation />
+			) : (
+				<CarCardsWrapper>
+					{carsToDisplay.length > 0 ? (
+						carsToDisplay.map(car => (
+							<CarCard key={car.id} car={car} isCompared={comparedCars.some(comparedCar => comparedCar.id === car.id)} />
+						))
+					) : (
+						<NoCarsInfo>There are no cars to display...</NoCarsInfo>
+					)}
+				</CarCardsWrapper>
+			)}
+
 			<Modal isOpen={isModalOpen} closeModal={closeModal}>
 				<FilterBox
 					title='Choose production year(s):'

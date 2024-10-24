@@ -6,6 +6,11 @@ export type CarCardProps = {
 	car: CarType;
 };
 
+export type CarInfoBoxProps = {
+	title: string;
+	content: string;
+};
+
 export type CarType = {
 	id: string;
 	brand: string;
@@ -18,17 +23,6 @@ export type CarType = {
 };
 
 export type CarsType = CarType[];
-
-type usersFilterPreferencesType = {
-	brands: {
-		value: string;
-		isActive: boolean;
-	}[];
-	years: {
-		value: number;
-		isActive: boolean;
-	}[];
-};
 
 export type CarsContextType = {
 	cars: CarsType;
@@ -46,6 +40,11 @@ export type CarsContextType = {
 
 export type CarsProviderProps = {
 	children: ReactNode;
+};
+
+export type CompareButtonProps = {
+	isCompared: boolean;
+	onClick: () => void;
 };
 
 export type comparedCarsType = never[] | CarsType;
@@ -76,4 +75,15 @@ export type SortSelectProps = {
 	defaultOption: string;
 	selectedValue: string;
 	handleSelectedValueChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+};
+
+type usersFilterPreferencesType = {
+	brands: {
+		value: string;
+		isActive: boolean;
+	}[];
+	years: {
+		value: number;
+		isActive: boolean;
+	}[];
 };

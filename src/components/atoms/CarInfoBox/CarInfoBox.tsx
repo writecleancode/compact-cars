@@ -1,9 +1,5 @@
+import { CarInfoBoxProps } from 'src/types/types';
 import { StyledInfo, StyledTitle } from './CarInfoBox.styles';
-
-type CarInfoBoxProps = {
-	title: string;
-	content: string;
-};
 
 export const CarInfoBox = ({ title, content }: CarInfoBoxProps) => (
 	<div>

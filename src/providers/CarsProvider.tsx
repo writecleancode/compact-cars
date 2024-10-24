@@ -16,7 +16,7 @@ export const CarsContext = createContext<CarsContextType>({
 	carsToDisplay: [],
 	setCarsToDisplay: () => {},
 	comparedCars: [],
-	usersFilterPreferences: {},
+	usersFilterPreferences: { brands: [], years: [] },
 	handleFilterPreferences: () => {},
 	removeCar: () => {},
 	sortCars: () => {},

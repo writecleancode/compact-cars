@@ -29,7 +29,7 @@ export type CarsContextType = {
 	carsToDisplay: CarsType;
 	setCarsToDisplay: React.Dispatch<React.SetStateAction<CarsType>>;
 	comparedCars: CarsType;
-	usersFilterPreferences: {} | usersFilterPreferencesType;
+	usersFilterPreferences: usersFilterPreferencesType;
 	handleFilterPreferences: (clickedOption: string | number) => void;
 	removeCar: (clickedId: string) => void;
 	sortCars: (sortCriteria: string) => void;
@@ -48,6 +48,13 @@ export type CompareButtonProps = {
 };
 
 export type comparedCarsType = never[] | CarsType;
+
+export type FilterBoxProps = {
+	title: string;
+	options: { value: string | number; isActive: boolean }[];
+	$isYears?: boolean;
+	handleFilter: (clickedOption: string | number) => void;
+};
 
 export type ModalProps = {
 	isOpen: boolean;

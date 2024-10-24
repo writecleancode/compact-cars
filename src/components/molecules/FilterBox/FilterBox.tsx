@@ -1,11 +1,6 @@
+import { FilterBoxProps } from 'src/types/types';
 import { StyledTitle } from 'src/components/atoms/StyledTitle/StyledTitle';
 import { FilterItem, FilterItems, Wrapper } from './FilterBox.styles';
-
-type FilterBoxProps = {
-	title: string;
-	options: { value: string | number; isActive: boolean }[];
-	$isYears?: boolean;
-};
 
 export const FilterBox = ({ title, options, $isYears, handleFilter }: FilterBoxProps) => {
 	return (
@@ -13,13 +8,7 @@ export const FilterBox = ({ title, options, $isYears, handleFilter }: FilterBoxP
 			<StyledTitle $isFilterTitle>{title}</StyledTitle>
 			<FilterItems>
 				{options.map(option => (
-					<FilterItem
-						key={option.value}
-						$isYears={$isYears}
-						$isActive={option.isActive}
-						// data-content={option.value}
-						// data-testid={option.value}
-						onClick={() => handleFilter(option.value)}>
+					<FilterItem key={option.value} $isYears={$isYears} $isActive={option.isActive} onClick={() => handleFilter(option.value)}>
 						{option.value}
 					</FilterItem>
 				))}

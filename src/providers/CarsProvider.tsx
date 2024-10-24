@@ -31,9 +31,24 @@ export const CarsProvider = ({ children }: CarsProviderProps) => {
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
 	const [comparedCars, setComparedCars] = useState<comparedCarsType>([]);
 
-	const removeCar = (clickedId: string) => {
-		const filteredCars = cars.filter(car => car.id !== clickedId);
+	const removeCarFromComparison = (clickedCarId: string) => {
+		const carIndex = comparedCars.map(car => car.id).indexOf(clickedCarId);
+		setComparedCars(prevState => [...prevState.slice(0, carIndex), ...prevState.slice(carIndex + 1)]);
+	};
+
+	const handleCompareStatus = (clickedCarId: string) => {
+		if (comparedCars.some(car => car.id === clickedCarId)) {
+			removeCarFromComparison(clickedCarId);
+		} else {
+			const clickedCar = cars.find(car => car.id === clickedCarId);
+			clickedCar && setComparedCars(prevState => [...prevState, clickedCar]);
+		}
+	};
+
+	const removeCar = (clickedCarId: string) => {
+		const filteredCars = cars.filter(car => car.id !== clickedCarId);
 		setCars(filteredCars);
+		removeCarFromComparison(clickedCarId);
 	};
 
 	const sortCars = (sortCriteria = 'byAlphabet') => {
@@ -114,16 +129,6 @@ export const CarsProvider = ({ children }: CarsProviderProps) => {
 				...prevState[optionType].slice(clickedOptionIndex + 1),
 			],
 		}));
-	};
-
-	const handleCompareStatus = (clickedCarId: string) => {
-		if (comparedCars.some(car => car.id === clickedCarId)) {
-			const carIndex = comparedCars.map(car => car.id).indexOf(clickedCarId);
-			setComparedCars(prevState => [...prevState.slice(0, carIndex), ...prevState.slice(carIndex + 1)]);
-		} else {
-			const clickedCar = cars.find(car => car.id === clickedCarId);
-			clickedCar && setComparedCars(prevState => [...prevState, clickedCar]);
-		}
 	};
 
 	return (

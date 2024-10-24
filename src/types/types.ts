@@ -49,6 +49,12 @@ export type CompareButtonProps = {
 
 export type comparedCarsType = never[] | CarsType;
 
+export type ModalProps = {
+	isOpen: boolean;
+	closeModal: () => void;
+	children: ReactNode;
+};
+
 export type ModalProviderProps = {
 	children: ReactNode;
 };

@@ -3,10 +3,19 @@ import ReactModal from 'react-modal';
 
 export const Wrapper = styled(ReactModal)`
 	padding: 1.6rem;
+	max-height: 100vh;
 	background-color: #fff;
-    box-shadow: 0 0 16px rgba(0, 0, 0, .5);
-    max-height: 100vh;
-    overflow-y: scroll;
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+	overflow-y: scroll;
+
+	@media (min-width: 640px) and (min-height: 560px) {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
+		width: 80vw;
+		box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+	}
 `;
 
 export const ModalButton = styled.button`

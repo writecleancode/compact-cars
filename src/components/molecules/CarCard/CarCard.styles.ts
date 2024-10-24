@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 	background-color: #f1f1f1;
 	color: #3e3e3e;
 	box-shadow: 0 0 8px rgba(0, 0, 0, 0.18);
+	container-type: inline-size;
 `;
 
 export const CarName = styled.p`
@@ -39,6 +40,12 @@ export const ButtonsWrapper = styled.div`
 	display: grid;
 	grid-template-rows: repeat(2, 1fr);
 	gap: 0.4rem;
+
+	@container (min-width: 190px) {
+		right: 0.8rem;
+		bottom: 0.8rem;
+		gap: 0.6rem;
+	}
 `;
 
 export const DeleteButton = styled(StyledButton)`

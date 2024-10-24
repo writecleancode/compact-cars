@@ -91,7 +91,6 @@ export const Dashboard = () => {
 					)}
 				</CarCardsWrapper>
 			)}
-
 			<Modal isOpen={isModalOpen} closeModal={closeModal}>
 				<FilterBox
 					title='Choose production year(s):'

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 
-export const Wrapper = styled.div<{ $isNavActive: boolean }>`
+export const Wrapper = styled.nav<{ $isNavActive: boolean }>`
 	position: absolute;
 	z-index: 2;
 	translate: ${({ $isNavActive }) => ($isNavActive ? '0' : '-100%')};

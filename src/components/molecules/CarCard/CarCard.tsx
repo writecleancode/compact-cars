@@ -1,25 +1,11 @@
-import { CarInfoBox } from 'src/components/atoms/CarInfoBox/CarInfoBox';
-import { TrashIcon } from 'src/assets/icons/TrashIcon';
-import { ButtonsWrapper, CarImg, CarInfoWrapper, CarName, DeleteButton, Wrapper } from './CarCard.styles';
-import { CompareButton } from 'src/components/atoms/CompareButton/CompareButton';
+import { CarCardProps } from 'src/types/types';
 import { useContext } from 'react';
 import { CarsContext } from 'src/providers/CarsProvider';
+import { CarInfoBox } from 'src/components/atoms/CarInfoBox/CarInfoBox';
+import { CompareButton } from 'src/components/atoms/CompareButton/CompareButton';
+import { TrashIcon } from 'src/assets/icons/TrashIcon';
+import { ButtonsWrapper, CarImg, CarInfoWrapper, CarName, DeleteButton, Wrapper } from './CarCard.styles';
 
-type CarCardProps = {
-	$isPreviewCard?: boolean;
-	car: {
-		id: string;
-		brand: string;
-		model: string;
-		generation: string;
-		productionStartYear: number;
-		productionEndYear: number;
-		facelift: string;
-		imgUrl: string;
-	};
-};
-
-// export const CarCard = ({ brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl }: CarCardProps) => {
 export const CarCard = ({
 	isPreviewCard = false,
 	isCompared,

@@ -1,5 +1,11 @@
 import { ChangeEvent, ReactNode } from 'react';
 
+export type CarCardProps = {
+	isPreviewCard?: boolean;
+	isCompared: boolean;
+	car: CarType;
+};
+
 export type CarType = {
 	id: string;
 	brand: string;

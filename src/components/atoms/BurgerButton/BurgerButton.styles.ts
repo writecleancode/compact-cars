@@ -44,4 +44,8 @@ export const Wrapper = styled.button<{ $isActive: boolean }>`
 			scale: ${({ $isActive }) => ($isActive ? '1.05 1' : '1 1')};
 		}
 	}
+
+	@media (min-width: 900px) {
+		display: none;
+	}
 `;

@@ -13,6 +13,17 @@ export const Wrapper = styled.nav<{ $isNavActive: boolean }>`
 	min-height: 100svh;
 	background-color: #fff;
 	transition: translate 0.2s;
+
+	@media (min-width: 900px) {
+		position: static;
+		z-index: initial;
+		translate: initial;
+		padding-right: 0.8rem;
+		border-left: 1px solid #d8d8d8;
+		height: auto;
+		min-height: initial;
+		transition: initial;
+	}
 `;
 
 export const NavLinksList = styled.ul`
@@ -27,6 +38,7 @@ export const NavLink = styled(RouterNavLink)`
 	display: inline-block;
 	position: relative;
 	padding: 0.4rem 0.8rem;
+	min-width: 14ch;
 	color: #3e3e3e;
 	font-size: 2rem;
 	font-weight: bold;

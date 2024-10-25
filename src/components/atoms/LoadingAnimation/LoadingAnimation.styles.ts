@@ -8,17 +8,21 @@ const spining = keyframes`
 100% {
     rotate: 360deg;
 }
-`
+`;
 
 export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-    gap: 1.6rem;
+	gap: 1.6rem;
 `;
 
 export const SpinningWheel = styled.img`
 	margin-top: 8rem;
 	width: 40px;
-    animation: ${spining} .3s infinite linear;
+	animation: ${spining} 0.3s infinite linear;
+
+	@media (min-width: 900px) {
+		width: 48px;
+	}
 `;

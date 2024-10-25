@@ -14,6 +14,7 @@ export const Wrapper = styled(ReactModal)`
 		left: 50%;
 		translate: -50% -50%;
 		width: 80vw;
+		max-width: 560px;
 		box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
 	}
 `;

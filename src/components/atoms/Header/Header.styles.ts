@@ -9,6 +9,11 @@ export const Wrapper = styled.div`
 	@media (min-width: 640px) {
 		padding: ${({ theme }) => `1.6rem calc(${theme.burgerButton.width} + ${theme.burgerButton.padding} * 2 + 2.4rem)`};
 	}
+
+	@media (min-width: 900px) {
+		grid-column: 1 / 3;
+		grid-row: 1 / 2;
+	}
 `;
 
 export const StyledTitle = styled.h1`
@@ -37,7 +42,7 @@ export const StyledTitle = styled.h1`
 
 		span {
 			display: inline-block;
-			margin-left: .4rem;
+			margin-left: 0.4rem;
 			width: auto;
 			font-size: 1.5rem;
 			text-align: initial;

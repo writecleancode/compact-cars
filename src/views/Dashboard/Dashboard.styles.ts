@@ -9,6 +9,11 @@ export const ControlsWrapper = styled.div`
 		padding: 0.8rem;
 		background-color: #d9d9d9;
 	}
+
+	@media (min-width: 900px) {
+		background-color: initial;
+		padding: 1.6rem 2.4rem;
+	}
 `;
 
 export const SearchWrapper = styled.div`
@@ -55,6 +60,12 @@ export const CarCardsWrapper = styled.div`
 	@media (min-width: 614px) {
 		grid-template-columns: repeat(3, 1fr);
 	}
+
+	@media (min-width: 900px) {
+		gap: 1.2rem;
+		padding-left: 2.4rem;
+		padding-right: 2.4rem;
+	} 
 `;
 
 export const NoCarsInfo = styled.p`

@@ -6,6 +6,7 @@ import { GlobalStyle } from 'src/assets/styles/GlobalStyle';
 import { Header } from 'src/components/atoms/Header/Header';
 import { NavBar } from 'src/components/organisms/NavBar/NavBar';
 import { CarsContext } from 'src/providers/CarsProvider';
+import { OutletWrapper, Wrapper } from './Root.styles';
 
 export const Root = () => {
 	const currentRoute = useLocation();
@@ -19,11 +20,13 @@ export const Root = () => {
 	return (
 		<div>
 			<GlobalStyle />
-			<div>
+			<Wrapper>
 				<Header />
 				<NavBar comparedCarsNumber={comparedCars.length} />
-			</div>
-			<Outlet context={{ cars, setCars, comparedCars } satisfies OutletContextType} />
+				<OutletWrapper>
+					<Outlet context={{ cars, setCars, comparedCars } satisfies OutletContextType} />
+				</OutletWrapper>
+			</Wrapper>
 		</div>
 	);
 };

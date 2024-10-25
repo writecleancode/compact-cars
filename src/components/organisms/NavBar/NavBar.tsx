@@ -7,7 +7,7 @@ export const NavBar = ({ comparedCarsNumber = 0 }) => {
 
 	return (
 		<>
-			<Wrapper $isNavActive={isNavActive} {...{ inert: isNavActive ? undefined : '' }}>
+			<Wrapper $isNavActive={isNavActive}>
 				<NavLinksList>
 					<li>
 						<NavLink to='/'>Dashboard</NavLink>

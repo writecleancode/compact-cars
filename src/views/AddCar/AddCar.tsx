@@ -3,7 +3,6 @@ import { useCars } from 'src/hooks/useCars';
 import { v4 as uuid } from 'uuid';
 import { Form } from 'src/components/organisms/Form/Form';
 import { CarCard } from 'src/components/molecules/CarCard/CarCard';
-import { SuccessNotification } from 'src/components/atoms/SuccessNotification/SuccessNotification';
 import { PreviewTitle, PreviewWrapper, Wrapper } from './AddCar.styles';
 import { useNotifications } from 'src/hooks/useNotifications';
 
@@ -20,7 +19,7 @@ const initialFormValues = {
 export const AddCar = () => {
 	const { setCars } = useCars();
 	const [formValues, setFormValues] = useState(initialFormValues);
-	const { successNotifications, handleSuccessNotifications } = useNotifications();
+	const { handleSuccessNotifications } = useNotifications();
 
 	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setFormValues(prevState => ({
@@ -46,9 +45,6 @@ export const AddCar = () => {
 				<PreviewTitle>Live preview</PreviewTitle>
 				<CarCard car={formValues} />
 			</PreviewWrapper>
-			{successNotifications.length > 0
-				? successNotifications.map(id => <SuccessNotification key={id}>✔ Car added to the list</SuccessNotification>)
-				: null}
 		</Wrapper>
 	);
 };

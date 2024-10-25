@@ -12,7 +12,8 @@ export const Wrapper = styled.nav<{ $isNavActive: boolean }>`
 	min-height: 100vh;
 	min-height: 100svh;
 	background-color: #fff;
-	transition: translate 0.2s;
+	visibility: ${({ $isNavActive }) => ($isNavActive ? 'visible' : 'hidden')};
+	transition: ${({ $isNavActive }) => ($isNavActive ? 'translate 0.2s' : 'translate 0.2s, visibility .2s .2s')};
 
 	@media (min-width: 900px) {
 		position: static;
@@ -22,6 +23,7 @@ export const Wrapper = styled.nav<{ $isNavActive: boolean }>`
 		border-left: 1px solid #d8d8d8;
 		height: auto;
 		min-height: initial;
+		visibility: visible;
 		transition: initial;
 	}
 `;

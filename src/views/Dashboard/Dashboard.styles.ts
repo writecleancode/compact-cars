@@ -65,7 +65,7 @@ export const CarCardsWrapper = styled.div`
 		gap: 1.2rem;
 		padding-left: 2.4rem;
 		padding-right: 2.4rem;
-	} 
+	}
 `;
 
 export const NoCarsInfo = styled.p`

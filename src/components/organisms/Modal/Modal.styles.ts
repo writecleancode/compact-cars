@@ -6,7 +6,7 @@ export const Wrapper = styled(ReactModal)`
 	max-height: 100vh;
 	background-color: #fff;
 	box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
-	overflow-y: scroll;
+	overflow-y: auto;
 
 	@media (min-width: 640px) and (min-height: 560px) {
 		position: absolute;

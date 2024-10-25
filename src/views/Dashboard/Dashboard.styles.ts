@@ -14,6 +14,10 @@ export const ControlsWrapper = styled.div`
 		background-color: initial;
 		padding: 1.6rem 2.4rem;
 	}
+
+	@media (min-width: 1600px) {
+		padding: 2.4rem 3.2rem;
+	}
 `;
 
 export const SearchWrapper = styled.div`
@@ -36,6 +40,10 @@ export const FiltersWrapper = styled.div`
 
 	@media (min-width: 640px) {
 		padding: 0;
+	}
+
+	@media (min-width: 1200px) {
+		display: none;
 	}
 `;
 
@@ -66,10 +74,31 @@ export const CarCardsWrapper = styled.div`
 		padding-left: 2.4rem;
 		padding-right: 2.4rem;
 	}
+
+	@media (min-width: 1500px) {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 1.6rem;
+	}
+
+	@media (min-width: 1600px) {
+		gap: 2rem;
+		padding-left: 3.2rem;
+		padding-right: 3.2rem;
+	}
 `;
 
 export const NoCarsInfo = styled.p`
 	grid-column: 1 / 3;
 	margin-top: 5.6rem;
 	text-align: center;
+
+	@media (min-width: 614px) {
+		grid-column: 1 / 4;
+		font-size: 1.7rem;
+	}
+
+	@media (min-width: 1500px) {
+		grid-column: 1 / 5;
+		font-size: 1.8rem;
+	}
 `;

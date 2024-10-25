@@ -18,6 +18,10 @@ export const CarName = styled.p`
 	font-size: 1.8rem;
 	font-weight: bold;
 	text-align: center;
+
+	@media (min-width: 1600px) {
+		margin-bottom: 0.8rem;
+	}
 `;
 
 export const CarImg = styled.img`

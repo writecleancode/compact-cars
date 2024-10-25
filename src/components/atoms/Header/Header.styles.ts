@@ -14,6 +14,14 @@ export const Wrapper = styled.div`
 		grid-column: 1 / 3;
 		grid-row: 1 / 2;
 	}
+
+	@media (min-width: 1200px) {
+		grid-column: 1 / 4;
+	}
+
+	@media (min-width: 1500px) {
+		padding: 1.8rem;
+	}
 `;
 
 export const StyledTitle = styled.h1`
@@ -47,6 +55,12 @@ export const StyledTitle = styled.h1`
 			font-size: 1.5rem;
 			text-align: initial;
 			line-height: 1.15;
+		}
+	}
+
+	@media (min-width: 1600px) {
+		span {
+			font-size: 1.6rem;
 		}
 	}
 `;

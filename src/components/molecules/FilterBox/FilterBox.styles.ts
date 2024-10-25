@@ -5,6 +5,10 @@ export const Wrapper = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	margin-bottom: 4.8rem;
+
+	@media (min-width: 1200px) {
+		margin-bottom: 0;
+	}
 `;
 
 export const FilterItems = styled.ul`

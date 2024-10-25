@@ -1,22 +1,22 @@
 import { selectOptions } from 'src/data/select';
 import { ChangeEvent, useCallback, useContext, useEffect, useState } from 'react';
 import { CarsContext } from 'src/providers/CarsProvider';
+import { ModalContext } from 'src/providers/ModalProvider';
 import { useCars } from 'src/hooks/useCars';
 import debounce from 'lodash.debounce';
 import { SearchInput } from 'src/components/atoms/SearchInput/SearchInput';
 import { SortSelect } from 'src/components/atoms/SortSelect/SortSelect';
-import { Modal } from 'src/components/organisms/Modal/Modal';
-import { FilterBox } from 'src/components/molecules/FilterBox/FilterBox';
-import { CarCard } from 'src/components/molecules/CarCard/CarCard';
-import { CarCardsWrapper, ControlsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, SearchWrapper } from './Dashboard.styles';
-import { ModalContext } from 'src/providers/ModalProvider';
 import { LoadingAnimation } from 'src/components/atoms/LoadingAnimation/LoadingAnimation';
+import { CarCard } from 'src/components/molecules/CarCard/CarCard';
+import { Modal } from 'src/components/organisms/Modal/Modal';
+import { FilterBoxYears } from 'src/components/molecules/FilterBoxYears/FilterBoxYears';
+import { FilterBoxBrands } from 'src/components/molecules/FilterBoxBrands/FilterBoxBrands';
+import { CarCardsWrapper, ControlsWrapper, FiltersWrapper, ManageFiltersButton, NoCarsInfo, SearchWrapper } from './Dashboard.styles';
 
 export const Dashboard = () => {
 	const [isLoading, setLoadingState] = useState(true);
 	const { cars, comparedCars } = useCars();
-	const { carsToDisplay, setCarsToDisplay, usersFilterPreferences, handleFilterPreferences, sortCars, findCars, filterCars } =
-		useContext(CarsContext);
+	const { carsToDisplay, setCarsToDisplay, usersFilterPreferences, sortCars, findCars, filterCars } = useContext(CarsContext);
 	const { isModalOpen, openModal, closeModal } = useContext(ModalContext);
 	const [selectedSortValue, setSelectedSortValue] = useState('');
 	const [searchPhrase, setSearchPhrase] = useState('');
@@ -92,13 +92,8 @@ export const Dashboard = () => {
 				</CarCardsWrapper>
 			)}
 			<Modal isOpen={isModalOpen} closeModal={closeModal}>
-				<FilterBox
-					title='Choose production year(s):'
-					options={usersFilterPreferences.years}
-					$isYears
-					handleFilter={handleFilterPreferences}
-				/>
-				<FilterBox title='Choose brand(s):' options={usersFilterPreferences.brands} handleFilter={handleFilterPreferences} />
+				<FilterBoxYears />
+				<FilterBoxBrands />
 			</Modal>
 		</div>
 	);

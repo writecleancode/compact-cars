@@ -17,6 +17,10 @@ export const Wrapper = styled(ReactModal)`
 		max-width: 560px;
 		box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
 	}
+
+	@media (min-width: 1200px) {
+		display: none;
+	}
 `;
 
 export const ModalButton = styled.button`

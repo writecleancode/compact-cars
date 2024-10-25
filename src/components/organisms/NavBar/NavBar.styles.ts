@@ -19,12 +19,18 @@ export const Wrapper = styled.nav<{ $isNavActive: boolean }>`
 		position: static;
 		z-index: initial;
 		translate: initial;
+		grid-column: 2 / 3;
+		grid-row: 2 / 3;
 		padding-right: 0.8rem;
 		border-left: 1px solid #d8d8d8;
 		height: auto;
 		min-height: initial;
 		visibility: visible;
 		transition: initial;
+	}
+
+	@media (min-width: 1200px) {
+		grid-column: 3 / 4;
 	}
 `;
 

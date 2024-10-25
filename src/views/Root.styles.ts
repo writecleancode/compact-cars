@@ -9,6 +9,19 @@ export const Wrapper = styled.div`
 		height: 100svh;
 		overflow: clip;
 	}
+
+	@media (min-width: 1200px) {
+		/* grid-template-columns: 1.33fr 3fr auto; */
+		grid-template-columns: 300px 1fr auto;
+	}
+
+	@media (min-width: 1400px) {
+		grid-template-columns: 320px 1fr auto;
+	}
+
+	@media (min-width: 1600px) {
+		grid-template-columns: 320px 1fr 320px;
+	}
 `;
 
 export const OutletWrapper = styled.div`
@@ -16,5 +29,9 @@ export const OutletWrapper = styled.div`
 		grid-column: 1 / 2;
 		grid-row: 2 / 3;
 		overflow-x: auto;
+	}
+
+	@media (min-width: 1200px) {
+		grid-column: 2 / 3;
 	}
 `;

@@ -22,6 +22,12 @@ export const GlobalStyle = createGlobalStyle`
         &.preventScroll {
             overflow-y: hidden;
         }
+
+        .ReactModalPortal {
+            @media (min-width: 1200px) {
+                display: none;
+            }
+        }
     }
 
     img {

@@ -27,7 +27,7 @@ export const CarsContext = createContext<CarsContextType>({
 });
 
 export const CarsProvider = ({ children }: CarsProviderProps) => {
-	const [cars, setCars] = useState(carsData);
+	const [cars, setCars] = useState<CarsType>(carsData);
 	const [carsToDisplay, setCarsToDisplay] = useState<CarsType>([]);
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
 	const [comparedCars, setComparedCars] = useState<comparedCarsType>([]);

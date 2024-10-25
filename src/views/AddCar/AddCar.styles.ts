@@ -12,6 +12,18 @@ export const Wrapper = styled.div`
 			flex-basis: 100%;
 		}
 	}
+
+	@media (min-width: 900px) {
+		justify-content: space-evenly;
+		align-items: center;
+		margin: 0 auto;
+		min-height: 100%;
+		max-width: 960px;
+
+		& > * {
+			flex-basis: initial;
+		}
+	}
 `;
 
 export const PreviewWrapper = styled.div`
@@ -21,7 +33,18 @@ export const PreviewWrapper = styled.div`
 	width: 50%;
 
 	@media (min-width: 620px) {
+		translate: 0 -10%;
+		margin: 0;
 		width: auto;
+	}
+
+	@media (min-width: 900px) {
+		flex-grow: 1;
+		max-width: 260px;
+	}
+
+	@media (min-width: 1600px) {
+		max-width: 290px;
 	}
 `;
 

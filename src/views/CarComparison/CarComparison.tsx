@@ -1,10 +1,11 @@
-import { useOutletContext } from 'react-router-dom';
+import { CarType } from 'src/types/types';
+import { useCars } from 'src/hooks/useCars';
 import { StyledParagraph, StyledTable, TableWrapper, Wrapper } from './CarComparison.styles';
 
 export const CarComparison = () => {
-	const { comparedCars } = useOutletContext();
+	const { comparedCars } = useCars();
 
-	const createTds = keyName => {
+	const createTds = (keyName: keyof CarType | 'emblem') => {
 		switch (keyName) {
 			case 'emblem':
 				return comparedCars.map(car => <td key={car.id} data-brand={car.brand}></td>);

@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 	padding: 1.2rem;
+
+	@media (min-height: 440px) {
+		margin-top: 1.6rem;
+	}
 `;
 
 export const TableWrapper = styled.div`
@@ -9,6 +13,7 @@ export const TableWrapper = styled.div`
 `;
 
 export const StyledTable = styled.table`
+	margin: 0 auto;
 	white-space: nowrap;
 
 	tbody {

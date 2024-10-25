@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useCars } from 'src/hooks/useCars';
 import { v4 as uuid } from 'uuid';
 import { Form } from 'src/components/organisms/Form/Form';
 import { CarCard } from 'src/components/molecules/CarCard/CarCard';
-import { PreviewTitle, PreviewWrapper, Wrapper } from './AddCar.styles';
 import { SuccessNotification } from 'src/components/atoms/SuccessNotification/SuccessNotification';
+import { PreviewTitle, PreviewWrapper, Wrapper } from './AddCar.styles';
 
 const initialFormValues = {
 	brand: 'Daewoo',
@@ -13,22 +13,22 @@ const initialFormValues = {
 	productionStartYear: 1997,
 	productionEndYear: 2003,
 	facelift: '1999',
-	imgUrl: 'https://www.datocms-assets.com/112049/1699699918-daewoo_nubira_i.jpg',
+	imgUrl: 'https://www.datocms-assets.com/112049/1729758737-daewoo_nubira_i.jpg',
 };
 
 export const AddCar = () => {
-	const { setCars } = useOutletContext();
+	const { setCars } = useCars();
 	const [formValues, setFormValues] = useState(initialFormValues);
-	const [successNotifications, setSuccessNotifications] = useState([]);
+	const [successNotifications, setSuccessNotifications] = useState<string[]>([]);
 
-	const handleInputChange = e => {
+	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setFormValues(prevState => ({
 			...prevState,
 			[e.target.name]: e.target.value,
 		}));
 	};
 
-	const removeSuccessNotification = id => {
+	const removeSuccessNotification = (id: string) => {
 		setSuccessNotifications(prevState => prevState.filter(el => el !== id));
 	};
 
@@ -39,7 +39,7 @@ export const AddCar = () => {
 		setTimeout(() => removeSuccessNotification(id), 2000);
 	};
 
-	const handleSubmitForm = e => {
+	const handleSubmitForm = (e: FormEvent) => {
 		e.preventDefault();
 		const newCar = {
 			id: uuid(),
@@ -54,7 +54,7 @@ export const AddCar = () => {
 			<Form formValues={formValues} handleInputChange={handleInputChange} handleSubmitForm={handleSubmitForm} />
 			<PreviewWrapper>
 				<PreviewTitle>Live preview</PreviewTitle>
-				<CarCard car={formValues} isPreviewCard />
+				<CarCard car={formValues} />
 			</PreviewWrapper>
 			{successNotifications.length > 0
 				? successNotifications.map(id => <SuccessNotification key={id}>✔ Car added to the list</SuccessNotification>)

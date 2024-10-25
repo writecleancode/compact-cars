@@ -1,8 +1,7 @@
 import { ChangeEvent, ReactNode } from 'react';
 
 export type CarCardProps = {
-	isPreviewCard?: boolean;
-	isCompared: boolean;
+	isCompared?: boolean;
 	car: CarType;
 };
 
@@ -12,7 +11,7 @@ export type CarInfoBoxProps = {
 };
 
 export type CarType = {
-	id: string;
+	id?: string;
 	brand: string;
 	model: string;
 	generation: string;
@@ -26,6 +25,7 @@ export type CarsType = CarType[];
 
 export type CarsContextType = {
 	cars: CarsType;
+	setCars: React.Dispatch<React.SetStateAction<CarsType>>;
 	carsToDisplay: CarsType;
 	setCarsToDisplay: React.Dispatch<React.SetStateAction<CarsType>>;
 	comparedCars: CarsType;
@@ -72,6 +72,7 @@ export type NavProviderProps = {
 
 export type OutletContextType = {
 	cars: CarsType;
+	setCars: React.Dispatch<React.SetStateAction<CarsType>>;
 	comparedCars: comparedCarsType;
 };
 

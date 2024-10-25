@@ -13,6 +13,7 @@ const getCarProductionYear = (car: CarType) => car.productionStartYear;
 
 export const CarsContext = createContext<CarsContextType>({
 	cars: [],
+	setCars: () => {},
 	carsToDisplay: [],
 	setCarsToDisplay: () => {},
 	comparedCars: [],
@@ -135,6 +136,7 @@ export const CarsProvider = ({ children }: CarsProviderProps) => {
 		<CarsContext.Provider
 			value={{
 				cars,
+				setCars,
 				carsToDisplay,
 				setCarsToDisplay,
 				comparedCars,

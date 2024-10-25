@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode } from 'react';
+import { ChangeEvent, FormEvent, ReactNode } from 'react';
 
 export type CarCardProps = {
 	isCompared?: boolean;
@@ -54,6 +54,29 @@ export type FilterBoxProps = {
 	options: { value: string | number; isActive: boolean }[];
 	$isYears?: boolean;
 	handleFilter: (clickedOption: string | number) => void;
+};
+
+export type FormFieldProps = {
+	label: string;
+	name: string;
+	id: string;
+	type?: string;
+	value: string | number;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type FormProps = {
+	formValues: {
+		brand: string;
+		model: string;
+		generation: string;
+		productionStartYear: number;
+		productionEndYear: number;
+		facelift: string;
+		imgUrl: string;
+	};
+	handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	handleSubmitForm: (e: FormEvent) => void;
 };
 
 export type ModalProps = {

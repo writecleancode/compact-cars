@@ -24,8 +24,8 @@ export const SuccessNotification = styled.span`
 	left: 50%;
 	translate: -50%;
 	transform: translateY(-120%);
-	border: 1px solid #cdcdcd;
 	padding: 1.6rem 2.4rem;
+	border: 1px solid #cdcdcd;
 	width: max-content;
 	background-color: #fff;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.22);

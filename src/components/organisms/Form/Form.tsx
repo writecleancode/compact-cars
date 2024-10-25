@@ -1,8 +1,9 @@
+import { FormProps } from 'src/types/types';
 import { FormField } from 'src/components/molecules/FormField/FormField';
 import { StyledButton } from 'src/components/atoms/StyledButton/StyledButton';
 import { Wrapper } from './Form.styles';
 
-export const Form = ({ formValues, handleInputChange, handleSubmitForm }) => {
+export const Form = ({ formValues, handleInputChange, handleSubmitForm }: FormProps) => {
 	return (
 		<Wrapper onSubmit={handleSubmitForm}>
 			<FormField label='Brand' name='brand' id='brand' value={formValues.brand} onChange={handleInputChange} />

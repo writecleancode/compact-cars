@@ -5,6 +5,7 @@ import { Form } from 'src/components/organisms/Form/Form';
 import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { SuccessNotification } from 'src/components/atoms/SuccessNotification/SuccessNotification';
 import { PreviewTitle, PreviewWrapper, Wrapper } from './AddCar.styles';
+import { useNotifications } from 'src/hooks/useNotifications';
 
 const initialFormValues = {
 	brand: 'Daewoo',
@@ -19,24 +20,13 @@ const initialFormValues = {
 export const AddCar = () => {
 	const { setCars } = useCars();
 	const [formValues, setFormValues] = useState(initialFormValues);
-	const [successNotifications, setSuccessNotifications] = useState<string[]>([]);
+	const { successNotifications, handleSuccessNotifications } = useNotifications();
 
 	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setFormValues(prevState => ({
 			...prevState,
 			[e.target.name]: e.target.value,
 		}));
-	};
-
-	const removeSuccessNotification = (id: string) => {
-		setSuccessNotifications(prevState => prevState.filter(el => el !== id));
-	};
-
-	const handleSuccessNotifications = () => {
-		const id = uuid();
-		setSuccessNotifications(prevState => [...prevState, id]);
-
-		setTimeout(() => removeSuccessNotification(id), 2000);
 	};
 
 	const handleSubmitForm = (e: FormEvent) => {

@@ -93,6 +93,15 @@ export type NavProviderProps = {
 	children: ReactNode;
 };
 
+export type NotificationsContextType = {
+	successNotifications: string[];
+	handleSuccessNotifications: () => void;
+};
+
+export type NotificationsProviderProps = {
+	children: ReactNode;
+};
+
 export type OutletContextType = {
 	cars: CarsType;
 	setCars: React.Dispatch<React.SetStateAction<CarsType>>;

@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { NavProvider } from './providers/NavProvider.tsx';
 import { CarsProvider } from './providers/CarsProvider.tsx';
 import { ModalProvider } from './providers/ModalProvider.tsx';
+import { NotificationsProvider } from './hooks/useNotifications.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Root } from './views/Root.tsx';
 import { Dashboard } from './views/Dashboard/Dashboard.tsx';
@@ -36,7 +37,9 @@ createRoot(document.getElementById('root')!).render(
 		<NavProvider>
 			<CarsProvider>
 				<ModalProvider>
-					<RouterProvider router={router} />
+					<NotificationsProvider>
+						<RouterProvider router={router} />
+					</NotificationsProvider>
 				</ModalProvider>
 			</CarsProvider>
 		</NavProvider>

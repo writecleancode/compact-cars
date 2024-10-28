@@ -1,44 +1,16 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useCars } from 'src/hooks/useCars';
+import { useForm } from 'src/hooks/useForm';
+import { useNotifications } from 'src/hooks/useNotifications';
 import { v4 as uuid } from 'uuid';
 import { Form } from 'src/components/organisms/Form/Form';
 import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { PreviewTitle, PreviewWrapper, Wrapper } from './AddCar.styles';
-import { useNotifications } from 'src/hooks/useNotifications';
-
-const initialFormValues = {
-	brand: 'Daewoo',
-	model: 'Nubira',
-	generation: 'I (J100)',
-	productionStartYear: 1997,
-	productionEndYear: 2003,
-	facelift: '1999',
-	imgUrl: 'https://www.datocms-assets.com/112049/1729758737-daewoo_nubira_i.jpg',
-};
 
 export const AddCar = () => {
 	const { setCars } = useCars();
-	const [formValues, setFormValues] = useState(initialFormValues);
+	const { formValues, handleInputChange, clearForm } = useForm();
 	const { handleSuccessNotifications } = useNotifications();
-
-	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setFormValues(prevState => ({
-			...prevState,
-			[e.target.name]: e.target.value,
-		}));
-	};
-
-	const clearForm = () => {
-		setFormValues({
-			brand: '',
-			model: '',
-			generation: '',
-			productionStartYear: 2000,
-			productionEndYear: 2000,
-			facelift: '',
-			imgUrl: '',
-		});
-	};
 
 	const handleSubmitForm = (e: FormEvent) => {
 		e.preventDefault();

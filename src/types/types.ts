@@ -1,5 +1,15 @@
 import { ChangeEvent, FormEvent, ReactNode } from 'react';
 
+type formValuesType = {
+	brand: string;
+	model: string;
+	generation: string;
+	productionStartYear: number;
+	productionEndYear: number;
+	facelift: string;
+	imgUrl: string;
+};
+
 export type CarCardProps = {
 	isCompared?: boolean;
 	car: CarType;
@@ -56,6 +66,12 @@ export type FilterBoxProps = {
 	handleFilter: (clickedOption: string | number) => void;
 };
 
+export type FormContextType = {
+	formValues: formValuesType;
+	handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	clearForm: () => void;
+};
+
 export type FormFieldProps = {
 	label: string;
 	name: string;
@@ -67,17 +83,13 @@ export type FormFieldProps = {
 };
 
 export type FormProps = {
-	formValues: {
-		brand: string;
-		model: string;
-		generation: string;
-		productionStartYear: number;
-		productionEndYear: number;
-		facelift: string;
-		imgUrl: string;
-	};
+	formValues: formValuesType;
 	handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	handleSubmitForm: (e: FormEvent) => void;
+};
+
+export type FormProviderProps = {
+	children: ReactNode;
 };
 
 export type ModalProps = {

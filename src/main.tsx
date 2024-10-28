@@ -10,6 +10,7 @@ import { Root } from './views/Root.tsx';
 import { Dashboard } from './views/Dashboard/Dashboard.tsx';
 import { CarComparison } from './views/CarComparison/CarComparison.tsx';
 import { AddCar } from './views/AddCar/AddCar.tsx';
+import { FormProvider } from './hooks/useForm.tsx';
 
 const router = createBrowserRouter([
 	{
@@ -37,9 +38,11 @@ createRoot(document.getElementById('root')!).render(
 		<NavProvider>
 			<CarsProvider>
 				<ModalProvider>
-					<NotificationsProvider>
-						<RouterProvider router={router} />
-					</NotificationsProvider>
+					<FormProvider>
+						<NotificationsProvider>
+							<RouterProvider router={router} />
+						</NotificationsProvider>
+					</FormProvider>
 				</ModalProvider>
 			</CarsProvider>
 		</NavProvider>

@@ -61,6 +61,7 @@ export type FormFieldProps = {
 	name: string;
 	id: string;
 	type?: string;
+	min?: number;
 	value: string | number;
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };

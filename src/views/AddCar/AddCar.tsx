@@ -28,6 +28,18 @@ export const AddCar = () => {
 		}));
 	};
 
+	const clearForm = () => {
+		setFormValues({
+			brand: '',
+			model: '',
+			generation: '',
+			productionStartYear: 2000,
+			productionEndYear: 2000,
+			facelift: '',
+			imgUrl: '',
+		});
+	};
+
 	const handleSubmitForm = (e: FormEvent) => {
 		e.preventDefault();
 		const newCar = {
@@ -35,6 +47,7 @@ export const AddCar = () => {
 			...formValues,
 		};
 		setCars(prevState => [newCar, ...prevState]);
+		clearForm();
 		handleSuccessNotifications();
 	};
 

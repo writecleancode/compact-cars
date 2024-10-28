@@ -8,20 +8,20 @@ import { ButtonsWrapper, CarImg, CarInfoWrapper, CarName, DeleteButton, Wrapper 
 
 export const CarCard = ({
 	isCompared = false,
-	car: { id, brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl},
+	car: { id, brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl },
 }: CarCardProps) => {
 	const { removeCar, handleCompareStatus } = useContext(CarsContext);
 
 	return (
 		<Wrapper>
 			<CarName>
-				{brand} {model}
+				{brand ? brand : 'unknown'} {model ? model : 'unknown'}
 			</CarName>
 			<CarImg src={imgUrl ? imgUrl : 'https://tritonvoice.co/wp-content/uploads/2020/12/Jaguar-car-770663.jpg'} alt={`${brand} ${model}`} />
 			<CarInfoWrapper>
-				<CarInfoBox title='Generation' content={generation} />
+				<CarInfoBox title='Generation' content={generation ? generation : 'unknown'} />
 				<CarInfoBox title='Production years' content={`${productionStartYear} - ${productionEndYear}`} />
-				<CarInfoBox title='Facelift' content={facelift} />
+				<CarInfoBox title='Facelift' content={facelift ? facelift : 'unknown'} />
 			</CarInfoWrapper>
 			{id ? (
 				<ButtonsWrapper>

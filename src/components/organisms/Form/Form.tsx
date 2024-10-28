@@ -14,6 +14,7 @@ export const Form = ({ formValues, handleInputChange, handleSubmitForm }: FormPr
 				name='productionStartYear'
 				id='productionStartYear'
 				type='number'
+				min={1886}
 				value={formValues.productionStartYear}
 				onChange={handleInputChange}
 			/>

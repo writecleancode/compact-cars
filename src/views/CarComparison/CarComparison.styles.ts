@@ -52,6 +52,7 @@ export const StyledTable = styled.table`
 			border-left: 20px solid transparent;
 			border-right: 20px solid transparent;
 			border-bottom: 0;
+			background-image: url('src/assets/img/unknown_brand.png');
 		}
 
 		&[data-brand='Alfa Romeo'] {

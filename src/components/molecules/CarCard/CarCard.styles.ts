@@ -24,12 +24,6 @@ export const CarName = styled.p`
 	}
 `;
 
-export const CarImg = styled.img`
-	width: 100%;
-	aspect-ratio: 320 / 220;
-	object-fit: cover;
-`;
-
 export const CarInfoWrapper = styled.div`
 	display: flex;
 	flex-direction: column;

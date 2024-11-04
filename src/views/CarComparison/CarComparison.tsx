@@ -11,10 +11,10 @@ export const CarComparison = () => {
 				return comparedCars.map(car => <td key={car.id} data-brand={car.brand}></td>);
 
 			case 'generation':
-				return comparedCars.map(car => <td key={car.id}>{car[keyName].replace(/ .*/, ' ')}</td>);
+				return comparedCars.map(car => <td key={car.id}>{car[keyName].replace(/ .*/, ' ') || 'unknown'}</td>);
 
 			default:
-				return comparedCars.map(car => <td key={car.id}>{car[keyName]}</td>);
+				return comparedCars.map(car => <td key={car.id}>{(car[keyName] as string | number) || 'unknown'}</td>);
 		}
 	};
 

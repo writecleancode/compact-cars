@@ -1,27 +1,28 @@
 import { CarCardProps } from 'src/types/types';
 import { useContext } from 'react';
 import { CarsContext } from 'src/providers/CarsProvider';
+import { CarImage } from 'src/components/atoms/CarImg/CarImage';
 import { CarInfoBox } from 'src/components/atoms/CarInfoBox/CarInfoBox';
 import { CompareButton } from 'src/components/atoms/CompareButton/CompareButton';
 import { TrashIcon } from 'src/assets/icons/TrashIcon';
-import { ButtonsWrapper, CarImg, CarInfoWrapper, CarName, DeleteButton, Wrapper } from './CarCard.styles';
+import { ButtonsWrapper, CarInfoWrapper, CarName, DeleteButton, Wrapper } from './CarCard.styles';
 
 export const CarCard = ({
 	isCompared = false,
-	car: { id, brand, model, generation, productionStartYear, productionEndYear, facelift, imgUrl },
+	car: { id, brand, model, generation, productionStartYear, productionEndYear, facelift, img },
 }: CarCardProps) => {
 	const { removeCar, handleCompareStatus } = useContext(CarsContext);
 
 	return (
 		<Wrapper>
 			<CarName>
-				{brand ? brand : 'unknown'} {model ? model : 'unknown'}
+				{brand || 'unknown'} {model || 'unknown'}
 			</CarName>
-			<CarImg src={imgUrl ? imgUrl : 'https://tritonvoice.co/wp-content/uploads/2020/12/Jaguar-car-770663.jpg'} alt={`${brand} ${model}`} />
+			<CarImage imgUrl={img} altText={`${brand} ${model}`} />
 			<CarInfoWrapper>
-				<CarInfoBox title='Generation' content={generation ? generation : 'unknown'} />
+				<CarInfoBox title='Generation' content={generation || 'unknown'} />
 				<CarInfoBox title='Production years' content={`${productionStartYear} - ${productionEndYear}`} />
-				<CarInfoBox title='Facelift' content={facelift ? facelift : 'unknown'} />
+				<CarInfoBox title='Facelift' content={facelift || 'unknown'} />
 			</CarInfoWrapper>
 			{id ? (
 				<ButtonsWrapper>

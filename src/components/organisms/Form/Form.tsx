@@ -27,7 +27,7 @@ export const Form = ({ formValues, handleInputChange, handleSubmitForm }: FormPr
 				onChange={handleInputChange}
 			/>
 			<FormField label='Year of facelift' name='facelift' id='facelift' value={formValues.facelift} onChange={handleInputChange} />
-			<FormField label='Photo url' name='imgUrl' id='imgUrl' value={formValues.imgUrl} onChange={handleInputChange} />
+			<FormField label='Photo url' name='img' id='imgUrl' value={formValues.img.small} onChange={handleInputChange} />
 			<StyledButton type='submit' $hasExtraMargin>
 				Add car
 			</StyledButton>

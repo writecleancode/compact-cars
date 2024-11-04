@@ -7,12 +7,23 @@ type formValuesType = {
 	productionStartYear: number;
 	productionEndYear: number;
 	facelift: string;
-	imgUrl: string;
+	img: carImageType;
 };
 
 export type CarCardProps = {
 	isCompared?: boolean;
 	car: CarType;
+};
+
+export type CarImageProps = {
+	imgUrl: carImageType;
+	altText: string;
+};
+
+type carImageType = {
+	small: string;
+	medium: string;
+	big?: string;
 };
 
 export type CarInfoBoxProps = {
@@ -28,7 +39,7 @@ export type CarType = {
 	productionStartYear: number;
 	productionEndYear: number;
 	facelift: string;
-	imgUrl: string;
+	img: carImageType;
 };
 
 export type CarsType = CarType[];
@@ -91,6 +102,8 @@ export type FormProps = {
 export type FormProviderProps = {
 	children: ReactNode;
 };
+
+export type formReducerType = (state: formValuesType, action: Record<string, string>) => formValuesType;
 
 export type ModalProps = {
 	isOpen: boolean;

@@ -11,7 +11,7 @@ export const cars: CarsType = [
 		productionEndYear: 2000,
 		facelift: '1999',
 		img: {
-			small: 'src/assets/img/cars/alfa_romeo_146_i_320.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-alfa_romeo_146_i_320.jpg',
 			medium: 'https://www.datocms-assets.com/112049/1699786166-alfa_romeo_146_i.png',
 		},
 	},
@@ -24,9 +24,9 @@ export const cars: CarsType = [
 		productionEndYear: 2003,
 		facelift: '2000',
 		img: {
-			small: 'src/assets/img/cars/audi_a3_i_320.jpg',
-			medium: 'src/assets/img/cars/audi_a3_i_1280.jpg',
-			big: '',
+			small: 'https://www.datocms-assets.com/112049/1730745383-audi_a3_i_320.jpg',
+			medium: 'https://www.datocms-assets.com/112049/1730745382-audi_a3_i_1280.jpg',
+			big: 'https://www.datocms-assets.com/112049/1699699902-audi_a3_i.jpg',
 		},
 	},
 	{
@@ -38,7 +38,7 @@ export const cars: CarsType = [
 		productionEndYear: 2000,
 		facelift: '-',
 		img: {
-			small: 'src/assets/img/cars/bmw_3_compact_i_320.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745385-bmw_3_compact_i_320.jpg',
 			medium: 'https://www.datocms-assets.com/112049/1729758243-bmw_3_compact_i.jpeg',
 		},
 	},
@@ -51,7 +51,7 @@ export const cars: CarsType = [
 		productionEndYear: 2005,
 		facelift: '2000',
 		img: {
-			small: 'src/assets/img/cars/citroen_xsara_i_320.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745386-citroen_xsara_i_320.jpg',
 			medium: 'https://www.datocms-assets.com/112049/1729758243-citroen_xsara_i.png',
 		},
 	},
@@ -64,7 +64,7 @@ export const cars: CarsType = [
 		productionEndYear: 2001,
 		facelift: '1999',
 		img: {
-			small: 'src/assets/img/cars/fiat_brava_i_320.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-fiat_brava_i_320.jpg',
 			medium: 'https://www.datocms-assets.com/112049/1729758753-fiat_brava_i.jpg',
 		},
 	},
@@ -77,8 +77,8 @@ export const cars: CarsType = [
 		productionEndYear: 2005,
 		facelift: '2001',
 		img: {
-			small: 'src/assets/img/cars/ford_focus_i_320.jpg',
-			medium: 'src/assets/img/cars/ford_focus_i_1280.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-ford_focus_i_320.jpg',
+			medium: 'https://www.datocms-assets.com/112049/1730745382-ford_focus_i_1280.jpg',
 			big: 'https://www.datocms-assets.com/112049/1729758779-ford_focus_i.jpg',
 		},
 	},
@@ -91,8 +91,8 @@ export const cars: CarsType = [
 		productionEndYear: 2001,
 		facelift: '1999',
 		img: {
-			small: 'src/assets/img/cars/honda_civic_vi_320.jpg',
-			medium: 'src/assets/img/cars/honda_civic_vi_1280.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-honda_civic_vi_320.jpg',
+			medium: 'https://www.datocms-assets.com/112049/1730745382-honda_civic_vi_1280.jpg',
 			big: 'https://www.datocms-assets.com/112049/1729758786-honda_civic_vi.jpg',
 		},
 	},
@@ -105,9 +105,9 @@ export const cars: CarsType = [
 		productionEndYear: 1999,
 		facelift: '-',
 		img: {
-			small: 'src/assets/img/cars/lancia_delta_ii_320.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-lancia_delta_ii_320.jpg',
 			medium: 'https://www.datocms-assets.com/112049/1729758791-lancia_delta_ii.webp',
-			big: 'src/assets/img/cars/lancia_delta_ii.jpg',
+			big: 'https://www.datocms-assets.com/112049/1730745385-lancia_delta_ii.jpg',
 		},
 	},
 	{
@@ -119,7 +119,7 @@ export const cars: CarsType = [
 		productionEndYear: 2003,
 		facelift: '2001',
 		img: {
-			small: 'src/assets/img/cars/mazda_323_vi_320.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-mazda_323_vi_320.jpg',
 			medium: 'https://www.datocms-assets.com/112049/1729758797-mazda_323_vi.jpg',
 		},
 	},
@@ -132,8 +132,8 @@ export const cars: CarsType = [
 		productionEndYear: 2000,
 		facelift: '1998',
 		img: {
-			small: 'src/assets/img/cars/nissan_almera_i_320.jpg',
-			medium: 'src/assets/img/cars/nissan_almera_i.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-nissan_almera_i_320.jpg',
+			medium: 'https://www.datocms-assets.com/112049/1730745382-nissan_almera_i.jpg',
 		},
 	},
 	{
@@ -145,8 +145,8 @@ export const cars: CarsType = [
 		productionEndYear: 2009,
 		facelift: '-',
 		img: {
-			small: 'src/assets/img/cars/opel_astra_ii_320.jpg',
-			medium: 'src/assets/img/cars/opel_astra_ii_1280.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-opel_astra_ii_320.jpg',
+			medium: 'https://www.datocms-assets.com/112049/1730745382-opel_astra_ii_1280.jpg',
 			big: 'https://www.datocms-assets.com/112049/1729759112-opel_astra_ii.webp',
 		},
 	},
@@ -159,7 +159,7 @@ export const cars: CarsType = [
 		productionEndYear: 2002,
 		facelift: '1997, 1999',
 		img: {
-			small: 'src/assets/img/cars/peugeot_306_i_320.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745383-peugeot_306_i_320.jpg',
 			medium: 'https://www.datocms-assets.com/112049/1729760838-peugeot_306_i.jpg',
 		},
 	},
@@ -172,8 +172,8 @@ export const cars: CarsType = [
 		productionEndYear: 2003,
 		facelift: '1999',
 		img: {
-			small: 'src/assets/img/cars/renault_megane_i_320.jpg',
-			medium: 'src/assets/img/cars/renault_megane_i_1280.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-renault_megane_i_320.jpg',
+			medium: 'https://www.datocms-assets.com/112049/1730745385-renault_megane_i_1280.jpg',
 			big: 'https://www.datocms-assets.com/112049/1729759123-renault_megane_i.jpg',
 		},
 	},
@@ -186,7 +186,7 @@ export const cars: CarsType = [
 		productionEndYear: 2005,
 		facelift: '-',
 		img: {
-			small: 'src/assets/img/cars/seat_leon_i_320.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-seat_leon_i_320.jpg',
 			medium: 'https://www.datocms-assets.com/112049/1729759130-seat_leon_i.jpg',
 		},
 	},
@@ -199,7 +199,7 @@ export const cars: CarsType = [
 		productionEndYear: 2002,
 		facelift: '1999',
 		img: {
-			small: 'src/assets/img/cars/toyota_corolla_viii_320.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-toyota_corolla_viii_320.jpg',
 			medium: 'https://www.datocms-assets.com/112049/1729759138-toyota_corolla_viii.jpg',
 		},
 	},
@@ -212,7 +212,7 @@ export const cars: CarsType = [
 		productionEndYear: 2003,
 		facelift: '-',
 		img: {
-			small: 'src/assets/img/cars/volkswagen_golf_iv_320.jpg',
+			small: 'https://www.datocms-assets.com/112049/1730745382-volkswagen_golf_iv_320.jpg',
 			medium: 'https://www.datocms-assets.com/112049/1729759146-volkswagen_golf_iv.jpg',
 		},
 	},

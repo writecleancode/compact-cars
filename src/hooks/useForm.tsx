@@ -9,8 +9,9 @@ const initialFormValues = {
 	productionEndYear: 2003,
 	facelift: '1999',
 	img: {
-		small: 'https://www.datocms-assets.com/112049/1729758737-daewoo_nubira_i.jpg',
-		medium: 'https://www.datocms-assets.com/112049/1729758737-daewoo_nubira_i.jpg',
+		small: 'https://www.datocms-assets.com/112049/1730745382-daewoo_nubira_i_320.jpg',
+		medium: 'https://www.datocms-assets.com/112049/1730745382-daewoo_nubira_i_1280.jpg',
+		big: 'https://www.datocms-assets.com/112049/1729758737-daewoo_nubira_i.jpg',
 	},
 };
 

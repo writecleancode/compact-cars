@@ -33,13 +33,18 @@ export const PreviewWrapper = styled.div`
 	width: 50%;
 
 	@media (min-width: 620px) {
-		translate: 0 -10%;
-		margin: 0;
+		margin-left: 0;
+		margin-right: 0;
 		width: auto;
+	}
+
+	@media (min-width: 760px) {
+		margin-top: 4rem;
 	}
 
 	@media (min-width: 900px) {
 		flex-grow: 1;
+		margin-top: 0;
 		max-width: 260px;
 	}
 

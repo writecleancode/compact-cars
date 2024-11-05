@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, ReactNode } from 'react';
+import { Dispatch, UnknownAction } from 'redux';
 
 type formValuesType = {
 	brand: string;
@@ -46,7 +47,6 @@ export type CarsType = CarType[];
 
 export type CarsContextType = {
 	cars: CarsType;
-	setCars: React.Dispatch<React.SetStateAction<CarsType>>;
 	carsToDisplay: CarsType;
 	setCarsToDisplay: React.Dispatch<React.SetStateAction<CarsType>>;
 	comparedCars: CarsType;
@@ -130,8 +130,9 @@ export type NotificationsProviderProps = {
 
 export type OutletContextType = {
 	cars: CarsType;
-	setCars: React.Dispatch<React.SetStateAction<CarsType>>;
 	comparedCars: comparedCarsType;
+	dispatch: Dispatch<UnknownAction>;
+	addCar: (payload: Record<string, string | CarType>) => { type: string; payload: Record<string, string | CarType> };
 };
 
 export type SearchInputProps = {

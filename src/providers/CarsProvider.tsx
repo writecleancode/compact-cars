@@ -1,7 +1,8 @@
 import { CarsContextType, CarsProviderProps, CarsType, CarType, comparedCarsType } from 'src/types/types';
-import { cars as carsData } from 'src/data/cars';
 import { filterBrands, filterYears } from 'src/data/filters';
 import { createContext, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCars } from 'src/store';
 
 const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
 const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
@@ -13,7 +14,6 @@ const getCarProductionYear = (car: CarType) => car.productionStartYear;
 
 export const CarsContext = createContext<CarsContextType>({
 	cars: [],
-	setCars: () => {},
 	carsToDisplay: [],
 	setCarsToDisplay: () => {},
 	comparedCars: [],
@@ -27,7 +27,8 @@ export const CarsContext = createContext<CarsContextType>({
 });
 
 export const CarsProvider = ({ children }: CarsProviderProps) => {
-	const [cars, setCars] = useState<CarsType>(carsData);
+	const cars = useSelector((state: Record<string, CarsType>) => state.cars);
+	const dispatch = useDispatch();
 	const [carsToDisplay, setCarsToDisplay] = useState<CarsType>([]);
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
 	const [comparedCars, setComparedCars] = useState<comparedCarsType>([]);
@@ -48,7 +49,7 @@ export const CarsProvider = ({ children }: CarsProviderProps) => {
 
 	const removeCar = (clickedCarId: string) => {
 		const filteredCars = cars.filter(car => car.id !== clickedCarId);
-		setCars(filteredCars);
+		dispatch(setCars({ cars: filteredCars }));
 		removeCarFromComparison(clickedCarId);
 	};
 
@@ -75,7 +76,7 @@ export const CarsProvider = ({ children }: CarsProviderProps) => {
 			}
 		});
 
-		setCars(sortedCars);
+		dispatch(setCars({ cars: sortedCars }));
 	};
 
 	const findCars = (inputValue: string) => {
@@ -136,7 +137,6 @@ export const CarsProvider = ({ children }: CarsProviderProps) => {
 		<CarsContext.Provider
 			value={{
 				cars,
-				setCars,
 				carsToDisplay,
 				setCarsToDisplay,
 				comparedCars,

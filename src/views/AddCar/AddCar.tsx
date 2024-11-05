@@ -8,7 +8,7 @@ import { CarCard } from 'src/components/molecules/CarCard/CarCard';
 import { PreviewTitle, PreviewWrapper, Wrapper } from './AddCar.styles';
 
 export const AddCar = () => {
-	const { setCars } = useCars();
+	const { dispatch, addCar } = useCars();
 	const { formValues, handleInputChange, clearForm } = useForm();
 	const { handleSuccessNotifications } = useNotifications();
 
@@ -18,7 +18,7 @@ export const AddCar = () => {
 			id: uuid(),
 			...formValues,
 		};
-		setCars(prevState => [newCar, ...prevState]);
+		dispatch(addCar({ newCar: newCar }));
 		clearForm();
 		handleSuccessNotifications();
 	};

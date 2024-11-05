@@ -11,6 +11,8 @@ import { Dashboard } from './views/Dashboard/Dashboard.tsx';
 import { CarComparison } from './views/CarComparison/CarComparison.tsx';
 import { AddCar } from './views/AddCar/AddCar.tsx';
 import { FormProvider } from './hooks/useForm.tsx';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const router = createBrowserRouter([
 	{
@@ -35,16 +37,18 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<NavProvider>
-			<CarsProvider>
-				<ModalProvider>
-					<FormProvider>
-						<NotificationsProvider>
-							<RouterProvider router={router} />
-						</NotificationsProvider>
-					</FormProvider>
-				</ModalProvider>
-			</CarsProvider>
-		</NavProvider>
+		<Provider store={store}>
+			<NavProvider>
+				<CarsProvider>
+					<ModalProvider>
+						<FormProvider>
+							<NotificationsProvider>
+								<RouterProvider router={router} />
+							</NotificationsProvider>
+						</FormProvider>
+					</ModalProvider>
+				</CarsProvider>
+			</NavProvider>
+		</Provider>
 	</StrictMode>
 );

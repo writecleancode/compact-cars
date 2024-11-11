@@ -2,6 +2,7 @@ import { OutletContextType } from 'src/types/types';
 import { useContext, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { addCar } from 'src/store';
 import { NavContext } from 'src/providers/NavProvider';
 import { CarsContext } from 'src/providers/CarsProvider';
 import { useNotifications } from 'src/hooks/useNotifications';
@@ -11,7 +12,6 @@ import { NavBar } from 'src/components/organisms/NavBar/NavBar';
 import { FiltersManagement } from 'src/components/organisms/FiltersManagement/FiltersManagement';
 import { SuccessNotification } from 'src/components/atoms/SuccessNotification/SuccessNotification';
 import { OutletWrapper, Wrapper } from './Root.styles';
-import { addCar } from 'src/store';
 
 export const Root = () => {
 	const currentRoute = useLocation();

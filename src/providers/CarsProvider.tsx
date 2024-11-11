@@ -1,4 +1,4 @@
-import { CarsContextType, CarsProviderProps, CarsType, CarType, comparedCarsType } from 'src/types/types';
+import { CarsContextType, CarsProviderProps, CarsType, CarType } from 'src/types/types';
 import { filterBrands, filterYears } from 'src/data/filters';
 import { createContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,24 +28,16 @@ export const CarsContext = createContext<CarsContextType>({
 
 export const CarsProvider = ({ children }: CarsProviderProps) => {
 	const cars = useSelector((state: Record<string, CarsType>) => state.cars);
-	const comparedCars = useSelector(state => state.comparedCars);
+	const comparedCars = useSelector((state: Record<string, CarsType>) => state.comparedCars);
 	const dispatch = useDispatch();
 	const [carsToDisplay, setCarsToDisplay] = useState<CarsType>([]);
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
-	// const [comparedCars, setComparedCars] = useState<comparedCarsType>([]);
-
-	// const removeCarFromComparison = (clickedCarId: string) => {
-	// 	const carIndex = comparedCars.map(car => car.id).indexOf(clickedCarId);
-	// 	setComparedCars(prevState => [...prevState.slice(0, carIndex), ...prevState.slice(carIndex + 1)]);
-	// };
 
 	const handleCompareStatus = (clickedCarId: string) => {
 		if (comparedCars.some(car => car.id === clickedCarId)) {
-			// removeCarFromComparison(clickedCarId);
 			dispatch(removeCarFromComparison({ id: clickedCarId }));
 		} else {
 			const clickedCar = cars.find(car => car.id === clickedCarId);
-			// clickedCar && setComparedCars(prevState => [...prevState, clickedCar]);
 			clickedCar && dispatch(addCarToComparison({ id: clickedCar }));
 		}
 	};
@@ -54,7 +46,6 @@ export const CarsProvider = ({ children }: CarsProviderProps) => {
 		const filteredCars = cars.filter(car => car.id !== clickedCarId);
 		dispatch(setCars({ cars: filteredCars }));
 		dispatch(removeCarFromComparison({ id: clickedCarId }));
-		// removeCarFromComparison(clickedCarId);
 	};
 
 	const sortCars = (sortCriteria = 'byAlphabet') => {

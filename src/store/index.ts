@@ -1,8 +1,8 @@
-import { actionType, CarsType, CarType } from 'src/types/types';
+import { actionType, CarsType, CarType, stateType } from 'src/types/types';
 import { cars as carsData } from 'src/data/cars';
 import { createStore } from 'redux';
 
-const initialState = {
+const initialState: stateType = {
 	cars: carsData,
 	comparedCars: [],
 };
@@ -21,14 +21,14 @@ export const addCar = (payload: Record<string, string | CarType>) => {
 	};
 };
 
-export const addCarToComparison = payload => {
+export const addCarToComparison = (payload: Record<string, string | CarType>) => {
 	return {
 		type: 'comparedCars/add',
 		payload,
 	};
 };
 
-export const removeCarFromComparison = payload => {
+export const removeCarFromComparison = (payload: Record<string, string | CarType>) => {
 	return {
 		type: 'comparedCars/remove',
 		payload,
@@ -52,7 +52,7 @@ const carsReducer = (state = initialState, action: actionType) => {
 		case 'comparedCars/add': {
 			return {
 				...state,
-				comparedCars: [...state.comparedCars, action.payload.id],
+				comparedCars: [...state.comparedCars, action.payload.car],
 			};
 		}
 

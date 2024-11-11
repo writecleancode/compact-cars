@@ -6,6 +6,8 @@ export type actionType = {
 	payload: {
 		cars: CarsType;
 		newCar?: CarType;
+		car?: CarType;
+		id?: string;
 	};
 };
 
@@ -156,6 +158,11 @@ export type SortSelectProps = {
 	defaultOption: string;
 	selectedValue: string;
 	handleSelectedValueChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+};
+
+export type stateType = {
+	cars: CarsType;
+	comparedCars: CarsType;
 };
 
 type usersFilterPreferencesType = {

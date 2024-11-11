@@ -2,7 +2,7 @@ import { CarsContextType, CarsProviderProps, CarsType, CarType, comparedCarsType
 import { filterBrands, filterYears } from 'src/data/filters';
 import { createContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCars } from 'src/store';
+import { addCarToComparison, removeCarFromComparison, setCars } from 'src/store';
 
 const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
 const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
@@ -28,29 +28,33 @@ export const CarsContext = createContext<CarsContextType>({
 
 export const CarsProvider = ({ children }: CarsProviderProps) => {
 	const cars = useSelector((state: Record<string, CarsType>) => state.cars);
+	const comparedCars = useSelector(state => state.comparedCars);
 	const dispatch = useDispatch();
 	const [carsToDisplay, setCarsToDisplay] = useState<CarsType>([]);
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });
-	const [comparedCars, setComparedCars] = useState<comparedCarsType>([]);
+	// const [comparedCars, setComparedCars] = useState<comparedCarsType>([]);
 
-	const removeCarFromComparison = (clickedCarId: string) => {
-		const carIndex = comparedCars.map(car => car.id).indexOf(clickedCarId);
-		setComparedCars(prevState => [...prevState.slice(0, carIndex), ...prevState.slice(carIndex + 1)]);
-	};
+	// const removeCarFromComparison = (clickedCarId: string) => {
+	// 	const carIndex = comparedCars.map(car => car.id).indexOf(clickedCarId);
+	// 	setComparedCars(prevState => [...prevState.slice(0, carIndex), ...prevState.slice(carIndex + 1)]);
+	// };
 
 	const handleCompareStatus = (clickedCarId: string) => {
 		if (comparedCars.some(car => car.id === clickedCarId)) {
-			removeCarFromComparison(clickedCarId);
+			// removeCarFromComparison(clickedCarId);
+			dispatch(removeCarFromComparison({ id: clickedCarId }));
 		} else {
 			const clickedCar = cars.find(car => car.id === clickedCarId);
-			clickedCar && setComparedCars(prevState => [...prevState, clickedCar]);
+			// clickedCar && setComparedCars(prevState => [...prevState, clickedCar]);
+			clickedCar && dispatch(addCarToComparison({ id: clickedCar }));
 		}
 	};
 
 	const removeCar = (clickedCarId: string) => {
 		const filteredCars = cars.filter(car => car.id !== clickedCarId);
 		dispatch(setCars({ cars: filteredCars }));
-		removeCarFromComparison(clickedCarId);
+		dispatch(removeCarFromComparison({ id: clickedCarId }));
+		// removeCarFromComparison(clickedCarId);
 	};
 
 	const sortCars = (sortCriteria = 'byAlphabet') => {

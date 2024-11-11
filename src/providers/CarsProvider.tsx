@@ -38,7 +38,7 @@ export const CarsProvider = ({ children }: CarsProviderProps) => {
 			dispatch(removeCarFromComparison({ id: clickedCarId }));
 		} else {
 			const clickedCar = cars.find(car => car.id === clickedCarId);
-			clickedCar && dispatch(addCarToComparison({ id: clickedCar }));
+			clickedCar && dispatch(addCarToComparison({ car: clickedCar }));
 		}
 	};
 

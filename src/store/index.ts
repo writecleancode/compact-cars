@@ -1,4 +1,4 @@
-import { CarsType, CarType } from 'src/types/types';
+import { actionType, CarsType, CarType } from 'src/types/types';
 import { cars as carsData } from 'src/data/cars';
 import { createStore } from 'redux';
 
@@ -18,14 +18,6 @@ export const addCar = (payload: Record<string, string | CarType>) => {
 
 const initialState = {
 	cars: carsData,
-};
-
-type actionType = {
-	type: string;
-	payload: {
-		cars: CarsType;
-		newCar?: CarType;
-	};
 };
 
 const carsReducer = (state = initialState, action: actionType) => {

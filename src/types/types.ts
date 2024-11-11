@@ -1,6 +1,14 @@
 import { ChangeEvent, FormEvent, ReactNode } from 'react';
 import { Dispatch, UnknownAction } from 'redux';
 
+export type actionType = {
+	type: string;
+	payload: {
+		cars: CarsType;
+		newCar?: CarType;
+	};
+};
+
 type formValuesType = {
 	brand: string;
 	model: string;

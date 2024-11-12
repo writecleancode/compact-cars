@@ -1,71 +1,43 @@
-import { actionType, CarsType, CarType, stateType } from 'src/types/types';
+import { CarsType } from 'src/types/types';
 import { cars as carsData } from 'src/data/cars';
-import { createStore } from 'redux';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-const initialState: stateType = {
-	cars: carsData,
-	comparedCars: [],
-};
+const initialCarsState = carsData;
+const initialComparedCarsState: CarsType = [];
 
-export const setCars = (payload: CarsType) => {
-	return {
-		type: 'cars/set',
-		payload,
-	};
-};
+const carsSlice = createSlice({
+	name: 'cars',
+	initialState: initialCarsState,
+	reducers: {
+		setCars(state, action) {
+			state.at(0); // this line is just TypeScript not to display warning that "'state' is declaed but the value is never read"
+			return action.payload;
+		},
+		addCar(state, action) {
+			state.unshift(action.payload);
+		},
+	},
+});
 
-export const addCar = (payload: CarType) => {
-	return {
-		type: 'cars/add',
-		payload,
-	};
-};
+const comparedCarsSlice = createSlice({
+	name: 'comparedCars',
+	initialState: initialComparedCarsState,
+	reducers: {
+		addCarToComparison(state, action) {
+			state.push(action.payload);
+		},
+		removeCarFromComparison(state, action) {
+			return state.filter(car => car.id !== action.payload);
+		},
+	},
+});
 
-export const addCarToComparison = (payload: CarType) => {
-	return {
-		type: 'comparedCars/add',
-		payload,
-	};
-};
+export const { setCars, addCar } = carsSlice.actions;
+export const { addCarToComparison, removeCarFromComparison } = comparedCarsSlice.actions;
 
-export const removeCarFromComparison = (payload: string) => {
-	return {
-		type: 'comparedCars/remove',
-		payload,
-	};
-};
-
-const carsReducer = (state = initialState, action: actionType) => {
-	switch (action.type) {
-		case 'cars/set':
-			return {
-				...state,
-				cars: [...action.payload],
-			};
-
-		case 'cars/add':
-			return {
-				...state,
-				cars: [action.payload, ...state.cars],
-			};
-
-		case 'comparedCars/add': {
-			return {
-				...state,
-				comparedCars: [...state.comparedCars, action.payload],
-			};
-		}
-
-		case 'comparedCars/remove': {
-			return {
-				...state,
-				comparedCars: state.comparedCars.filter(car => car.id !== action.payload),
-			};
-		}
-
-		default:
-			return state;
-	}
-};
-
-export const store = createStore(carsReducer);
+export const store = configureStore({
+	reducer: {
+		cars: carsSlice.reducer,
+		comparedCars: comparedCarsSlice.reducer,
+	},
+});

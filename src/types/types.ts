@@ -1,24 +1,6 @@
 import { ChangeEvent, FormEvent, ReactNode } from 'react';
 import { Dispatch, UnknownAction } from 'redux';
 
-export type actionType =
-	| {
-			type: 'cars/set';
-			payload: CarsType;
-	  }
-	| {
-			type: 'cars/add';
-			payload: CarType;
-	  }
-	| {
-			type: 'comparedCars/add';
-			payload: CarType;
-	  }
-	| {
-			type: 'comparedCars/remove';
-			payload: string;
-	  };
-
 type formValuesType = {
 	brand: string;
 	model: string;
@@ -166,11 +148,6 @@ export type SortSelectProps = {
 	defaultOption: string;
 	selectedValue: string;
 	handleSelectedValueChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-};
-
-export type stateType = {
-	cars: CarsType;
-	comparedCars: CarsType;
 };
 
 type usersFilterPreferencesType = {

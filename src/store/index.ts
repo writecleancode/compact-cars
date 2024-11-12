@@ -7,28 +7,28 @@ const initialState: stateType = {
 	comparedCars: [],
 };
 
-export const setCars = (payload: Record<string, string | CarsType>) => {
+export const setCars = (payload: CarsType) => {
 	return {
 		type: 'cars/set',
 		payload,
 	};
 };
 
-export const addCar = (payload: Record<string, string | CarType>) => {
+export const addCar = (payload: CarType) => {
 	return {
 		type: 'cars/add',
 		payload,
 	};
 };
 
-export const addCarToComparison = (payload: Record<string, string | CarType>) => {
+export const addCarToComparison = (payload: CarType) => {
 	return {
 		type: 'comparedCars/add',
 		payload,
 	};
 };
 
-export const removeCarFromComparison = (payload: Record<string, string | CarType>) => {
+export const removeCarFromComparison = (payload: string) => {
 	return {
 		type: 'comparedCars/remove',
 		payload,
@@ -40,26 +40,26 @@ const carsReducer = (state = initialState, action: actionType) => {
 		case 'cars/set':
 			return {
 				...state,
-				cars: [...action.payload.cars],
+				cars: [...action.payload],
 			};
 
 		case 'cars/add':
 			return {
 				...state,
-				cars: [action.payload.newCar, ...state.cars],
+				cars: [action.payload, ...state.cars],
 			};
 
 		case 'comparedCars/add': {
 			return {
 				...state,
-				comparedCars: [...state.comparedCars, action.payload.car],
+				comparedCars: [...state.comparedCars, action.payload],
 			};
 		}
 
 		case 'comparedCars/remove': {
 			return {
 				...state,
-				comparedCars: state.comparedCars.filter(car => car.id !== action.payload.id),
+				comparedCars: state.comparedCars.filter(car => car.id !== action.payload),
 			};
 		}
 

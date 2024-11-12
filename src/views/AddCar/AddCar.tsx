@@ -18,7 +18,7 @@ export const AddCar = () => {
 			id: uuid(),
 			...formValues,
 		};
-		dispatch(addCar({ newCar: newCar }));
+		dispatch(addCar(newCar));
 		clearForm();
 		handleSuccessNotifications();
 	};

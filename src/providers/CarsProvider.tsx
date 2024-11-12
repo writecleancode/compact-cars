@@ -35,17 +35,17 @@ export const CarsProvider = ({ children }: CarsProviderProps) => {
 
 	const handleCompareStatus = (clickedCarId: string) => {
 		if (comparedCars.some(car => car.id === clickedCarId)) {
-			dispatch(removeCarFromComparison({ id: clickedCarId }));
+			dispatch(removeCarFromComparison(clickedCarId));
 		} else {
 			const clickedCar = cars.find(car => car.id === clickedCarId);
-			clickedCar && dispatch(addCarToComparison({ car: clickedCar }));
+			clickedCar && dispatch(addCarToComparison(clickedCar));
 		}
 	};
 
 	const removeCar = (clickedCarId: string) => {
 		const filteredCars = cars.filter(car => car.id !== clickedCarId);
-		dispatch(setCars({ cars: filteredCars }));
-		dispatch(removeCarFromComparison({ id: clickedCarId }));
+		dispatch(setCars(filteredCars));
+		dispatch(removeCarFromComparison(clickedCarId));
 	};
 
 	const sortCars = (sortCriteria = 'byAlphabet') => {
@@ -71,7 +71,7 @@ export const CarsProvider = ({ children }: CarsProviderProps) => {
 			}
 		});
 
-		dispatch(setCars({ cars: sortedCars }));
+		dispatch(setCars(sortedCars));
 	};
 
 	const findCars = (inputValue: string) => {

@@ -1,15 +1,23 @@
 import { ChangeEvent, FormEvent, ReactNode } from 'react';
 import { Dispatch, UnknownAction } from 'redux';
 
-export type actionType = {
-	type: string;
-	payload: {
-		cars: CarsType;
-		newCar?: CarType;
-		car?: CarType;
-		id?: string;
-	};
-};
+export type actionType =
+	| {
+			type: 'cars/set';
+			payload: CarsType;
+	  }
+	| {
+			type: 'cars/add';
+			payload: CarType;
+	  }
+	| {
+			type: 'comparedCars/add';
+			payload: CarType;
+	  }
+	| {
+			type: 'comparedCars/remove';
+			payload: string;
+	  };
 
 type formValuesType = {
 	brand: string;
@@ -142,7 +150,7 @@ export type OutletContextType = {
 	cars: CarsType;
 	comparedCars: comparedCarsType;
 	dispatch: Dispatch<UnknownAction>;
-	addCar: (payload: Record<string, string | CarType>) => { type: string; payload: Record<string, string | CarType> };
+	addCar: (payload: CarType) => { type: string; payload: CarType };
 };
 
 export type SearchInputProps = {

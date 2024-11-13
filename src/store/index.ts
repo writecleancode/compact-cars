@@ -1,13 +1,15 @@
-import { CarsType } from 'src/types/types';
+import { reduxInitialStateType } from 'src/types/types';
 import { cars as carsData } from 'src/data/cars';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-const initialCarsState = carsData;
-const initialComparedCarsState: CarsType = [];
+const initialState: reduxInitialStateType = {
+	cars: carsData,
+	comparedCars: [],
+};
 
 const carsSlice = createSlice({
 	name: 'cars',
-	initialState: initialCarsState,
+	initialState: initialState.cars,
 	reducers: {
 		setCars(state, action) {
 			state.at(0); // this line is just TypeScript not to display warning that "'state' is declaed but the value is never read"
@@ -21,7 +23,7 @@ const carsSlice = createSlice({
 
 const comparedCarsSlice = createSlice({
 	name: 'comparedCars',
-	initialState: initialComparedCarsState,
+	initialState: initialState.comparedCars,
 	reducers: {
 		addCarToComparison(state, action) {
 			state.push(action.payload);

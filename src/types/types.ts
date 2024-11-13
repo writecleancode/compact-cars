@@ -135,6 +135,11 @@ export type OutletContextType = {
 	addCar: (payload: CarType) => { type: string; payload: CarType };
 };
 
+export type reduxInitialStateType = {
+	cars: CarsType;
+	comparedCars: CarsType;
+};
+
 export type SearchInputProps = {
 	value: string;
 	handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;

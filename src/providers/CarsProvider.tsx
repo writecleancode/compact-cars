@@ -2,7 +2,7 @@ import { CarsContextType, CarsProviderProps, CarsType, CarType } from 'src/types
 import { filterBrands, filterYears } from 'src/data/filters';
 import { createContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCarToComparison, removeCarFromComparison, setCars } from 'src/store';
+import { addCarToComparison, removeCarFromComparison, RootState, setCars } from 'src/store';
 
 const filterBrandsData = filterBrands.map(option => ({ value: option, isActive: false }));
 const filterYearsData = filterYears.map(option => ({ value: option, isActive: false }));
@@ -27,8 +27,8 @@ export const CarsContext = createContext<CarsContextType>({
 });
 
 export const CarsProvider = ({ children }: CarsProviderProps) => {
-	const cars = useSelector((state: Record<string, CarsType>) => state.cars);
-	const comparedCars = useSelector((state: Record<string, CarsType>) => state.comparedCars);
+	const cars = useSelector((state: RootState) => state.cars);
+	const comparedCars = useSelector((state: RootState) => state.comparedCars);
 	const dispatch = useDispatch();
 	const [carsToDisplay, setCarsToDisplay] = useState<CarsType>([]);
 	const [usersFilterPreferences, setUsersFilterPreferences] = useState({ brands: filterBrandsData, years: filterYearsData });

@@ -43,3 +43,5 @@ export const store = configureStore({
 		comparedCars: comparedCarsSlice.reducer,
 	},
 });
+
+export type RootState = ReturnType<typeof store.getState>;
